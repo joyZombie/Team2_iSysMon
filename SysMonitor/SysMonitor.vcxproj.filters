@@ -13,10 +13,24 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Source Files\SystemInteraction">
+      <UniqueIdentifier>{c8be0762-1c38-4489-a502-fb7a1ac78f35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SystemInteraction">
+      <UniqueIdentifier>{4cba38eb-e96a-4e36-8a33-154383b48757}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MemoryUsage.cpp">
+      <Filter>Source Files\SystemInteraction</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sysinteraction.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

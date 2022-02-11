@@ -1,9 +1,13 @@
+#include "sysinteraction.h"
 #include <iostream>
 
-using namespace std;
+
 
 int main()
 {
-	cout << "Hello" << endl;
-	return 0;
+    std::cout << getTotalRAM() << std::endl;
+    std::cout << getAvailRAM() << std::endl;
+    return 0;
 }
+
+
