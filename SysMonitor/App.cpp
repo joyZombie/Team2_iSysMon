@@ -76,6 +76,8 @@ int main()
 	// Shut down everything
 	closesocket(sock);
 	WSACleanup();
+	cout << "Sent Data & Disconnected from Server" << endl;
+	system("pause");
 	return 0;
 }
 
