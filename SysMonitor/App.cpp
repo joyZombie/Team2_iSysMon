@@ -2,6 +2,8 @@
 #include <iostream>
 #include <WS2tcpip.h>
 
+using namespace std;
+
 int main()
 {
     
