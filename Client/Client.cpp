@@ -47,7 +47,7 @@ void main()
 	}
 	else
 	{
-		cout << "Connection established to Server @ " << ipAddress << ":" << port << endl;
+		cout << "Connection established to Server." << endl;
 	}
 
 	// Do-while loop to send and receive data
