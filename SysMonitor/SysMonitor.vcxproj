@@ -140,7 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />
-    <ClCompile Include="MemoryUsage.cpp" />
+    <ClCompile Include="sysinteraction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sysinteraction.h" />

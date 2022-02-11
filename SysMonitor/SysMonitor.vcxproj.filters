@@ -24,7 +24,7 @@
     <ClCompile Include="App.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MemoryUsage.cpp">
+    <ClCompile Include="sysinteraction.cpp">
       <Filter>Source Files\SystemInteraction</Filter>
     </ClCompile>
   </ItemGroup>
