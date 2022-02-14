@@ -5,6 +5,8 @@
 #include <string>
 #include <sstream>
 
+#define HOSTNAME_SIZE 128
+
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma once

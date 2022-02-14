@@ -19,11 +19,11 @@ void SystemInformation::fetchAvailRAM()
 
 void SystemInformation::fetchHostName() 
 {
-	char hostName[128] = "";
+	char hostName[HOSTNAME_SIZE] = "";
 	WSADATA wsaData;
 	auto res = WSAStartup(MAKEWORD(2, 2), &wsaData);
 	if (res == 0) {
-		gethostname(hostName, 128);
+		gethostname(hostName, HOSTNAME_SIZE);
 	}
 	WSACleanup();
 	this->hostName = std::string(hostName);
