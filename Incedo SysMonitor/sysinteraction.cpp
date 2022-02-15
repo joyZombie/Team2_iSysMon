@@ -1,5 +1,5 @@
 #include "sysinteraction.h"
- 
+
 
 void SystemInformation::fetchTotalRAM()
 {
@@ -17,7 +17,7 @@ void SystemInformation::fetchAvailRAM()
 	freeRam = (int)(m.ullAvailPhys >> 20);
 }
 
-void SystemInformation::fetchHostName() 
+void SystemInformation::fetchHostName()
 {
 	char hostName[HOSTNAME_SIZE] = "";
 	WSADATA wsaData;

@@ -3,13 +3,20 @@
 
 #include "framework.h"
 #include "Incedo SysMonitor.h"
+#include "sysinteraction.h"
+#include "Timer.h"
 
 #define MAX_LOADSTRING 100
+#define TIMER_DURATION 1
+#define START_BUTTON 1
+#define STOP_BUTTON 2
 
 // Global Variables:
 HINSTANCE hInst;                                // current instance
 WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
+SystemInformation systemInformation;
+HWND systemInfo;
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -100,6 +107,45 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
+   HWND hwndButton1 = CreateWindowW(
+       L"BUTTON",  // Predefined class; Unicode assumed 
+       L"Start Timer",      // Button text 
+       WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+       10,         // x position 
+       10,         // y position 
+       100,        // Button width
+       30,        // Button height
+       hWnd,     // Parent window
+       (HMENU)START_BUTTON,       // No menu.
+       hInstance,
+       NULL);      // Pointer not needed.
+
+   HWND hwndButton2 = CreateWindowW(
+       L"BUTTON",  // Predefined class; Unicode assumed 
+       L"Stop Timer",      // Button text 
+       WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+       150,         // x position 
+       10,         // y position 
+       100,        // Button width
+       30,        // Button height
+       hWnd,     // Parent window
+       (HMENU)STOP_BUTTON,       // No menu.
+       hInstance,
+       NULL);
+
+   systemInfo = CreateWindowA(
+       "STATIC",  // Predefined class; Unicode assumed 
+       "Start Timer",      // Button text 
+       WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
+       10,         // x position 
+       50,         // y position 
+       600,        // Button width
+       600,        // Button height
+       hWnd,     // Parent window
+       (HMENU)START_BUTTON,       // No menu.
+       hInstance,
+       NULL);
+
    if (!hWnd)
    {
       return FALSE;
@@ -136,6 +182,14 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 break;
             case IDM_EXIT:
                 DestroyWindow(hWnd);
+                break;
+            case START_BUTTON:
+                startTimer(TIMER_DURATION);
+                MessageBox(NULL, (LPCWSTR)L"Started.", (LPCWSTR)L"Started", MB_OK);
+                break;
+            case STOP_BUTTON:
+                stopTimer();
+                MessageBox(NULL, (LPCWSTR)L"Stopped.", (LPCWSTR)L"Stopped", MB_OK);
                 break;
             default:
                 return DefWindowProc(hWnd, message, wParam, lParam);
@@ -177,4 +231,9 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         break;
     }
     return (INT_PTR)FALSE;
+}
+
+void updateStats()
+{
+    SetWindowTextA(systemInfo, systemInformation.getData().c_str());
 }

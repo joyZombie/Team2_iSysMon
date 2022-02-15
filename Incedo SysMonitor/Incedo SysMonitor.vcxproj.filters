@@ -13,6 +13,15 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\SystemInteraction">
+      <UniqueIdentifier>{a589a982-fb51-4b59-b9e0-1b2b20716c48}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\SystemInteraction">
+      <UniqueIdentifier>{69cde277-2382-4d38-930d-65c60e993f99}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Client">
+      <UniqueIdentifier>{07f198b1-cc72-464d-ac48-6f7a45bccdca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -27,10 +36,22 @@
     <ClInclude Include="Incedo SysMonitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="sysinteraction.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Incedo SysMonitor.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="sysinteraction.cpp">
+      <Filter>Source Files\SystemInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Source Files\SystemInteraction</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
