@@ -4,16 +4,16 @@
 
 using namespace std;
 
-void SendData()
+int SendData()
 {
 	SystemInformation si;
 	string ipaddress = "127.0.0.1";			// ip address of the server
 	int port = 8080;						// listening port # on the server
 	
 	// initialize winsock
-	wsadata data;
-	word ver = makeword(2, 2);
-	int wsresult = wsastartup(ver, &data);
+	WSAData data;
+	WORD ver = MAKEWORD(2, 2);
+	int wsresult = WSAStartup(ver, &data);
 	if (wsresult != 0)
 	{
 		cerr << "can't start winsock, err #" << wsresult << endl;
@@ -21,27 +21,27 @@ void SendData()
 	}
 	
 	// create socket
-	socket sock = socket(af_inet, sock_stream, 0);
-	if (sock == invalid_socket)
+	SOCKET sock = socket(AF_INET, SOCK_STREAM, 0);
+	if (sock == INVALID_SOCKET)
 	{
-		cerr << "can't create socket, err #" << wsagetlasterror() << endl;
-		wsacleanup();
+		cerr << "can't create socket, err #" << WSAGetLastError() << endl;
+		WSACleanup();
 		return 0;
 	}
 	
 	// fill in a hint structure
 	sockaddr_in hint;
-	hint.sin_family = af_inet;
+	hint.sin_family = AF_INET;
 	hint.sin_port = htons(port);
-	inet_pton(af_inet, ipaddress.c_str(), &hint.sin_addr);
+	inet_pton(AF_INET, ipaddress.c_str(), &hint.sin_addr);
 	
 	// connect to server
 	int connresult = connect(sock, (sockaddr*)&hint, sizeof(hint));
-	if (connresult == socket_error)
+	if (connresult == SOCKET_ERROR)
 	{
-		cerr << "can't connect to server, err #" << wsagetlasterror() << endl;
+		cerr << "can't connect to server, err #" << WSAGetLastError() << endl;
 		closesocket(sock);
-		wsacleanup();
+		WSACleanup();
 		return 0;
 	}
 	else
@@ -54,15 +54,15 @@ void SendData()
 	// stored data for passing to the server only one time. further modification can add more robustness
 	char buf[4096];
 	string userinput;
-	userinput = si.getdata();
+	userinput = si.getData();
 	if (userinput.size() > 0)				// make sure the user has typed in something
 	{
 		// send the text
 		int sendresult = send(sock, userinput.c_str(), userinput.size() + 1, 0);
-		if (sendresult != socket_error)
+		if (sendresult != SOCKET_ERROR)
 		{
 			// waiting for response
-			zeromemory(buf, 4096);
+			ZeroMemory(buf, 4096);
 			int bytesreceived = recv(sock, buf, 4096, 0);
 			if (bytesreceived > 0)
 			{
@@ -74,7 +74,7 @@ void SendData()
 	
 	// shut down everything
 	closesocket(sock);
-	wsacleanup();
+	WSACleanup();
 	cout << "sent data & disconnected from server" << endl;
 	system("pause");
 }
