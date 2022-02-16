@@ -80,9 +80,21 @@ void SystemInformation::getSystemInfo()
 	{
 		processorArchitecture = "Intel Itanium-based";
 	}
+	else if (sysInfo.wProcessorArchitecture == 12)
+	{
+		processorArchitecture = "ARM64";
+	}
+	else if (sysInfo.wProcessorArchitecture == 5)
+	{
+		processorArchitecture = "ARM";
+	}
+	else if (sysInfo.wProcessorArchitecture == 0)
+	{
+		processorArchitecture = "x86";
+	}
 	else
 	{
-		processorArchitecture = "Unknown Processor";
+		processorArchitecture = "Unknown architecture";
 	}
 	//processorLevel = sysInfo.wProcessorLevel;
 	processorType = sysInfo.dwProcessorType;
@@ -96,7 +108,7 @@ void SystemInformation::getSystemIdleTime()
 	idleTime = GetTickCount() - li.dwTime;//in milliseconds
 }
 
-void SystemInformation::getGPU()
+/*void SystemInformation::getGPU()
 {
 	HRESULT hres;
 	hres = CoInitializeEx(0, COINIT_MULTITHREADED);
@@ -153,7 +165,41 @@ void SystemInformation::getGPU()
 	pEnumerator->Release();
 	//pclsObj->Release();
 	CoUninitialize();
+}*/
+
+
+void SystemInformation::getHardDiskSpace()
+{
+	BOOL fResult;
+	unsigned __int64 i64FreeBytesToCaller,
+		i64TotalBytes,
+		i64FreeBytes;
+	fResult = GetDiskFreeSpaceEx(L"C:",
+		(PULARGE_INTEGER)&i64FreeBytesToCaller,
+		(PULARGE_INTEGER)&i64TotalBytes,
+		(PULARGE_INTEGER)&i64FreeBytes);
+	if (fResult)
+	{
+		/*printf("\n\nGetDiskFreeSpaceEx reports\n\n");
+		printf("Available space to caller = %I64u MB\n",
+			i64FreeBytesToCaller / (1024 * 1024));
+		printf("Total space               = %I64u MB\n",
+			i64TotalBytes / (1024 * 1024));
+		printf("Free space on drive       = %I64u MB\n",
+		i64FreeBytes / (1024 * 1024));*/
+		totalSpace = i64TotalBytes / (1024 * 1024);
+		freeSpace = i64FreeBytes / (1024 * 1024);
+	}
 }
+void SystemInformation::getCurrentTime()
+{
+		auto start = std::chrono::system_clock::now();
+		auto legacyStart = std::chrono::system_clock::to_time_t(start);
+		char tmBuff[30];
+		ctime_s(tmBuff, sizeof(tmBuff), &legacyStart);
+		this->tmBuff = std::string(tmBuff);
+}
+
 
 std::string SystemInformation::getData()
 {
@@ -174,8 +220,13 @@ std::string SystemInformation::getData()
 	data << "Processor Type : " << processorType << ' ' << "\n";
 	getSystemIdleTime();
 	data << "System Idle Time : " << idleTime << ' ' << "ms\n";
-	getGPU();
-	data << "GPU : " << GPU.bstrVal << ' ' << "\n";
+	getHardDiskSpace();
+	data << "Total Hard Disk Space : " << totalSpace << ' ' << "MB\n";
+	data << "Free Hard Disk Space : " << freeSpace << ' ' << "MB\n";
+	getCurrentTime();
+	data << "Current Time : " << tmBuff << ' ' << "\n";
+	//getGPU();
+	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	return data.str();
 }

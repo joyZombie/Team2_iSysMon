@@ -8,6 +8,7 @@
 #include <tchar.h>
 #include <comdef.h>
 #include <Wbemidl.h>
+#include<chrono>
 # pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "ws2_32.lib")
 #pragma once
@@ -31,7 +32,9 @@ private:
 	unsigned int processorLevel{};
 	unsigned int processorType{};
 	UINT idleTime{};
-	VARIANT GPU{};
+	UINT32 totalSpace{};
+	UINT32 freeSpace{};
+	std::string tmBuff{};
 
 	void fetchTotalRAM();
 	void getUserName();
@@ -40,7 +43,8 @@ private:
 	void GetCPULoad();
 	void getSystemInfo();
 	void getSystemIdleTime();
-	void getGPU();
+	void getHardDiskSpace();
+	void getCurrentTime();
 
 public:
 	SystemInformation() = default;
