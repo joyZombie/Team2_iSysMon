@@ -235,5 +235,5 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 void updateStats()
 {
-    SetWindowTextA(systemInfo, systemInformation.getData().c_str());
+    SetWindowTextA(systemInfo,systemInformation.getData().c_str());
 }
