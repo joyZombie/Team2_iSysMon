@@ -54,7 +54,9 @@ int SendData()
 	// stored data for passing to the server only one time. further modification can add more robustness
 	char buf[4096];
 	string userinput;
-	userinput = si.getData();
+	si.putInFile();
+	userinput = si.getFile();
+
 	if (userinput.size() > 0)				// make sure the user has typed in something
 	{
 		// send the text

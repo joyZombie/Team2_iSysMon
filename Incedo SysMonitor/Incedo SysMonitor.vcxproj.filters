@@ -56,6 +56,12 @@
     <ClCompile Include="Client.cpp">
       <Filter>Source Files\Client</Filter>
     </ClCompile>
+    <ClCompile Include="FileWriter.cpp">
+      <Filter>Source Files\SystemInteraction</Filter>
+    </ClCompile>
+    <ClCompile Include="FileReader.cpp">
+      <Filter>Source Files\SystemInteraction</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Incedo SysMonitor.rc">

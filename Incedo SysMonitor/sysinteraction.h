@@ -14,10 +14,12 @@
 #pragma once
 #define HOSTNAME_SIZE 128
 
+using namespace std;
 
 #pragma comment(lib, "ws2_32.lib")
 #pragma once
 
+int SendData();
 
 class SystemInformation
 {
@@ -50,5 +52,6 @@ public:
 	SystemInformation() = default;
 	std::string getData();
 	void putInFile();
+	string getFile();
 
 };

@@ -205,38 +205,29 @@ std::string SystemInformation::getData()
 {
 	std::stringstream data;
 	fetchHostName();
-	data << "HostName: " << hostName << " \n";
+	data << "HostName, " << hostName << " \n";
 	getUserName();
-	data << "UserName: " << userName << " \n";
+	data << "UserName, " << userName << " \n";
 	fetchTotalRAM();
-	data << "Total Ram: " << totalRam << ' ' << "MB\n";
+	data << "Total Ram, " << totalRam << ' ' << "MB\n";
 	fetchAvailRAM();
-	data << "Available Ram: " << freeRam << ' ' << "MB\n";
+	data << "Available Ram, " << freeRam << ' ' << "MB\n";
 	GetCPULoad();
-	data << "CPU LOAD : " << cpuLoad << ' ' << "%\n";
+	data << "CPU LOAD, " << cpuLoad << ' ' << "%\n";
 	getSystemInfo();
-	data << "Processor Architecture : " << processorArchitecture << ' ' << "\n";
+	data << "Processor Architecture, " << processorArchitecture << ' ' << "\n";
 	//data << "Processor Level : " << processorLevel << ' ' << "\n";
-	data << "Processor Type : " << processorType << ' ' << "\n";
+	data << "Processor Type, " << processorType << ' ' << "\n";
 	getSystemIdleTime();
-	data << "System Idle Time : " << idleTime << ' ' << "ms\n";
+	data << "System Idle Time, " << idleTime << ' ' << "ms\n";
 	getHardDiskSpace();
-	data << "Total Hard Disk Space : " << totalSpace << ' ' << "MB\n";
-	data << "Free Hard Disk Space : " << freeSpace << ' ' << "MB\n";
+	data << "Total Hard Disk Space, " << totalSpace << ' ' << "MB\n";
+	data << "Free Hard Disk Space, " << freeSpace << ' ' << "MB\n";
 	getCurrentTime();
-	data << "Current Time : " << tmBuff << ' ' << "\n";
+	data << "Current Time, " << tmBuff << ' ' << "\n";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	return data.str();
 }
 
-
-
-void SystemInformation::putInFile()
-{
-	std::ofstream output;
-	output.open("Stats.txt", std::ofstream::out);
-	output << getData();
-	output.close();
-}
