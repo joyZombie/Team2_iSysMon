@@ -19,7 +19,8 @@ void startTimer(UINT time)
 
 void stopTimer()
 {
-    bool x = KillTimer(NULL, id);
+    if (!timerRunning) return;
+    KillTimer(NULL, id);
     timerRunning = false;
 }
 

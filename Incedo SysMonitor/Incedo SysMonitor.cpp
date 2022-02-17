@@ -129,7 +129,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        100,        // Button width
        30,        // Button height
        hWnd,     // Parent window
-       (HMENU)STOP_BUTTON,       // No menu.
+       (HMENU)STOP_BUTTON,       
        hInstance,
        NULL);
 
@@ -142,7 +142,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        600,        // Button width
        600,        // Button height
        hWnd,     // Parent window
-       (HMENU)START_BUTTON,       // No menu.
+       (HMENU)START_BUTTON,       
        hInstance,
        NULL);
 
@@ -205,6 +205,7 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         }
         break;
     case WM_DESTROY:
+        stopTimer();
         PostQuitMessage(0);
         break;
     default:
