@@ -5,9 +5,11 @@
 #include "Incedo SysMonitor.h"
 #include "sysinteraction.h"
 #include "Timer.h"
+#include <iostream>
+#include <filesystem>
 
 #define MAX_LOADSTRING 100
-#define TIMER_DURATION 1
+#define TIMER_DURATION 10
 #define START_BUTTON 1
 #define STOP_BUTTON 2
 
@@ -33,7 +35,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     UNREFERENCED_PARAMETER(lpCmdLine);
 
     // TODO: Place code here.
-    int res = SendData();
+   
     // Initialize global strings
     LoadStringW(hInstance, IDS_APP_TITLE, szTitle, MAX_LOADSTRING);
     LoadStringW(hInstance, IDC_INCEDOSYSMONITOR, szWindowClass, MAX_LOADSTRING);
@@ -236,5 +238,10 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 void updateStats()
 {
-    SetWindowTextA(systemInfo,systemInformation.getData().c_str());
+    
+    string FileName = systemInformation.putInFile();
+    int res = SendData(FileName);
+    
+    SetWindowTextA(systemInfo,systemInformation.getFile(FileName).c_str());
+    systemInformation.deleteFile(FileName);
 }

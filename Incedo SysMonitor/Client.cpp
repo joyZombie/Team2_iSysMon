@@ -4,7 +4,7 @@
 
 using namespace std;
 
-int SendData()
+int SendData(string FileName)
 {
 	SystemInformation si;
 	string ipaddress = "127.0.0.1";			// ip address of the server
@@ -54,8 +54,7 @@ int SendData()
 	// stored data for passing to the server only one time. further modification can add more robustness
 	char buf[4096];
 	string userinput;
-	si.putInFile();
-	userinput = si.getFile();
+	userinput = si.getFile(FileName);
 
 	if (userinput.size() > 0)				// make sure the user has typed in something
 	{
