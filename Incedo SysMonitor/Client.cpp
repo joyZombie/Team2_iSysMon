@@ -77,6 +77,7 @@ int SendData(string FileName)
 	closesocket(sock);
 	WSACleanup();
 	cout << "sent data & disconnected from server" << endl;
-	system("pause");
+	return 1;
+	//system("pause");
 }
 

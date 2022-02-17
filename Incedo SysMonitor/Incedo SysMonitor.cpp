@@ -9,7 +9,7 @@
 #include <filesystem>
 
 #define MAX_LOADSTRING 100
-#define TIMER_DURATION 10
+#define TIMER_DURATION 15
 #define START_BUTTON 1
 #define STOP_BUTTON 2
 
@@ -240,8 +240,10 @@ void updateStats()
 {
     
     string FileName = systemInformation.putInFile();
-    int res = SendData(FileName);
+    int res = 0;
+    res = SendData(FileName);
+
     
     SetWindowTextA(systemInfo,systemInformation.getFile(FileName).c_str());
-    systemInformation.deleteFile(FileName);
+    if(res == 1) systemInformation.deleteFile(FileName);
 }
