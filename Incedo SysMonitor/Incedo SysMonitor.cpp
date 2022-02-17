@@ -6,7 +6,6 @@
 #include "sysinteraction.h"
 #include "Timer.h"
 #include <iostream>
-#include <filesystem>
 
 #define MAX_LOADSTRING 100
 #define TIMER_DURATION 15
@@ -111,11 +110,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    HWND hwndButton1 = CreateWindowW(
        L"BUTTON",  // Predefined class; Unicode assumed 
-       L"Start Timer",      // Button text 
+       L"Start Monitoring",      // Button text 
        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
-       10,         // x position 
+       320,         // x position 
        10,         // y position 
-       100,        // Button width
+       120,        // Button width
        30,        // Button height
        hWnd,     // Parent window
        (HMENU)START_BUTTON,       // No menu.
@@ -124,11 +123,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    HWND hwndButton2 = CreateWindowW(
        L"BUTTON",  // Predefined class; Unicode assumed 
-       L"Stop Timer",      // Button text 
+       L"Stop Monitoring",      // Button text 
        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
-       150,         // x position 
+       450,         // x position 
        10,         // y position 
-       100,        // Button width
+       120,        // Button width
        30,        // Button height
        hWnd,     // Parent window
        (HMENU)STOP_BUTTON,       
@@ -141,8 +140,8 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        WS_TABSTOP | WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON,  // Styles 
        10,         // x position 
        50,         // y position 
-       600,        // Button width
-       600,        // Button height
+       900,        // Button width
+       900,        // Button height
        hWnd,     // Parent window
        (HMENU)START_BUTTON,       
        hInstance,
