@@ -19,7 +19,7 @@ using namespace std;
 #pragma comment(lib, "ws2_32.lib")
 #pragma once
 
-int SendData();
+int SendData(string FileName);
 
 class SystemInformation
 {
@@ -51,7 +51,8 @@ private:
 public:
 	SystemInformation() = default;
 	std::string getData();
-	void putInFile();
-	string getFile();
+	string putInFile();
+	string getFile(string FileName);
+	void deleteFile(string Filename);
 
 };

@@ -9,7 +9,7 @@
 #include <algorithm>
 #pragma comment(lib, "User32.lib")
 
-string SystemInformation::getFile()
+string SystemInformation::getFile(string FileName)
 {
 	vector<string> files;
 	string Directory = "Data";

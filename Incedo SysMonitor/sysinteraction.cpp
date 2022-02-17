@@ -231,3 +231,22 @@ std::string SystemInformation::getData()
 	return data.str();
 }
 
+
+void SystemInformation::deleteFile(string FileName) {
+
+	char File[50];
+	
+	File[0] = 'D';
+	File[1] = 'a';
+	File[2] = 't';
+	File[3] = 'a';
+	File[4] = '/';
+	int i = 0;
+	for (i = 0; i < FileName.size(); i++) {
+		File[i+5] = FileName[i];
+	}
+	File[i+5] = '\0';
+	int del = remove(File);
+
+}
+
