@@ -51,7 +51,7 @@ string SystemInformation::getFile(string FileName)
 
 		while (StatsFile.good()) {
 			string Line;
-			getline(StatsFile, Line, ',');
+			getline(StatsFile, Line);
 			Data += Line;
 
 		}
