@@ -60,7 +60,6 @@ void updateDB(string data)
 
 		if (nQueryState != 0) {
 			cout << mysql_error(connection) << endl;
-			return 1;
 		}
 	}
 
