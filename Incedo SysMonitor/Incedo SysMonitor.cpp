@@ -238,6 +238,7 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 void updateStats()
 {
+    systemInformation.fetchAllData();
     SetWindowTextA(systemInfo,systemInformation.getDataToDisplay().c_str());   
     sendPeriodicData();
 }

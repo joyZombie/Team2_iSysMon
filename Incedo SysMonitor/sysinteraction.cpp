@@ -206,24 +206,16 @@ std::string SystemInformation::getData()
 	std::stringstream data;
 	fetchHostName();
 	data << hostName << ",";
-	getUserName();
 	data  << userName << ",";
-	fetchTotalRAM();
 	data << totalRam << ' ' << ",";
-	fetchAvailRAM();
 	data << freeRam << ' ' << ",";
-	GetCPULoad();
 	data << cpuLoad << ' ' << ",";
-	getSystemInfo();
 	data << processorArchitecture << ",";
 	//data << "Processor Level : " << processorLevel << ' ' << "\n";
 	data << processorType << ' ' << ",";
-	getSystemIdleTime();
 	data << idleTime << ' ' << ",";
-	getHardDiskSpace();
 	data << totalSpace << ",";
 	data << freeSpace << ",";
-	getCurrentTime();
 	data << tmBuff << ",";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
@@ -235,26 +227,17 @@ std::string SystemInformation::getData()
 std::string SystemInformation::getDataToDisplay()
 {
 	std::stringstream data;
-	fetchHostName();
 	data << "HostName: " << hostName << " \n";
-	getUserName();
 	data << "UserName: " << userName << " \n";
-	fetchTotalRAM();
 	data << "Total Ram: " << totalRam << ' ' << "MB\n";
-	fetchAvailRAM();
 	data << "Available Ram: " << freeRam << ' ' << "MB\n";
-	GetCPULoad();
 	data << "CPU LOAD: " << cpuLoad << ' ' << "%\n";
-	getSystemInfo();
 	data << "Processor Architecture: " << processorArchitecture << ' ' << "\n";
 	//data << "Processor Level : " << processorLevel << ' ' << "\n";
 	data << "Processor Type: " << processorType << ' ' << "\n";
-	getSystemIdleTime();
 	data << "System Idle Time: " << idleTime << ' ' << "ms\n";
-	getHardDiskSpace();
 	data << "Total Hard Disk Space: " << totalSpace << ' ' << "MB\n";
 	data << "Free Hard Disk Space: " << freeSpace << ' ' << "MB\n";
-	getCurrentTime();
 	data << "Current Time: " << tmBuff << ' ' << "\n";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
@@ -279,5 +262,18 @@ void SystemInformation::deleteFile(string FileName) {
 	File[i+5] = '\0';
 	int del = remove(File);
 
+}
+
+void SystemInformation::fetchAllData()
+{
+	fetchHostName();
+	getUserName();
+	fetchTotalRAM();
+	fetchAvailRAM();
+	GetCPULoad();
+	getSystemInfo();
+	getSystemIdleTime();
+	getHardDiskSpace();
+	getCurrentTime();
 }
 

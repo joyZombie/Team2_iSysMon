@@ -53,6 +53,7 @@ public:
 	std::string getData();
 	std::string getDataToDisplay();
 	string putInFile();
+	void fetchAllData();
 	string getFile(string FileName);
 	void deleteFile(string Filename);
 
