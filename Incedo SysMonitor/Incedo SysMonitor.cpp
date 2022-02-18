@@ -8,7 +8,7 @@
 #include <iostream>
 
 #define MAX_LOADSTRING 100
-#define TIMER_DURATION 15
+#define TIMER_DURATION 5
 #define START_BUTTON 1
 #define STOP_BUTTON 2
 
@@ -18,6 +18,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 SystemInformation systemInformation;
 HWND systemInfo;
+//Timer liveDataTimer(1, updateStats);
 
 // Forward declarations of functions included in this code module:
 ATOM                MyRegisterClass(HINSTANCE hInstance);
@@ -237,12 +238,14 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
 void updateStats()
 {
-    
+    SetWindowTextA(systemInfo,systemInformation.getDataToDisplay().c_str());   
+    sendPeriodicData();
+}
+
+void sendPeriodicData() 
+{
     string FileName = systemInformation.putInFile();
     int res = 0;
     res = SendData(FileName);
-
-    
-    SetWindowTextA(systemInfo,systemInformation.getFile(FileName).c_str());
-    if(res == 1) systemInformation.deleteFile(FileName);
+    if (res == 1) systemInformation.deleteFile(FileName);
 }

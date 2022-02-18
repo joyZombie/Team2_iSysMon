@@ -51,6 +51,7 @@ private:
 public:
 	SystemInformation() = default;
 	std::string getData();
+	std::string getDataToDisplay();
 	string putInFile();
 	string getFile(string FileName);
 	void deleteFile(string Filename);
