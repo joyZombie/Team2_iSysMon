@@ -6,8 +6,10 @@
 #include <sstream>
 
 #pragma comment (lib, "ws2_32.lib")
-
+#pragma warning(disable : 4996)
 using namespace std;
+
+char message[64] = "";
 
 void updateDB(string data)
 {
@@ -35,30 +37,33 @@ void updateDB(string data)
 
 	// Creating Query Stream for passing as String
 	stringstream ss;
-	ss << "insert into test1 values(";
+	ss << "insert into stats values(";
 
 	for (auto value : dataStream)
 	{
+		//cout << value << " ";
 		ss << "\'";
 		ss << value;
-		if(value != dataStream.back())
+		if (value != dataStream.back())
 			ss << "\',";
 		else
 			ss << "\');";
 	}
-
+	
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "Piyush@1234", "test", 0, NULL, 0);
+	connection = mysql_real_connect(&mysql, "localhost", "root", "password", "sysmonitor", 0, NULL, 0);
 
 	if (connection == NULL)
 	{
+		strcpy(message, "failed");
 		cout << mysql_error(&mysql) << endl;
 	}
 	else {
 		nQueryState = mysql_query(&mysql, ss.str().c_str());
 
 		if (nQueryState != 0) {
+			strcpy(message, "failed");
 			cout << mysql_error(connection) << endl;
 		}
 	}
@@ -153,10 +158,12 @@ void main()
 			}
 
 			string data = string(buf, 0, bytesReceived);
+			cout << data << endl;
+			strcpy(message, "updated");
 			updateDB(data);
-
+			
 			// Echo message back to client
-			send(clientSocket, buf, bytesReceived + 1, 0);
+			send(clientSocket, message, bytesReceived + 1, 0);
 
 		}
 
