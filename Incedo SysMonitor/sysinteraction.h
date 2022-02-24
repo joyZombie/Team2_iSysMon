@@ -60,8 +60,12 @@ public:
 	std::string getDataToDisplay();
 	void fetchAllData();
 <<<<<<< HEAD
+<<<<<<< HEAD
 	void setUserId(LPSTR);
 =======
 
 >>>>>>> Sending all backlog files.
+=======
+	void setUserId(LPSTR);
+>>>>>>> Added userID
 };
