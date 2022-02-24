@@ -1,4 +1,13 @@
+<<<<<<< HEAD
 #include "server.h"
+=======
+#if 0
+
+
+#include <iostream>
+#include <WS2tcpip.h>
+#include <string>
+>>>>>>> Sending all backlog files.
 
 int main()
 {
@@ -113,3 +122,10 @@ int main()
 	system("pause");
 	return 0;
 }
+<<<<<<< HEAD
+=======
+
+#endif
+
+
+>>>>>>> Sending all backlog files.

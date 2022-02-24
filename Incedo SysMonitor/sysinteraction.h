@@ -9,7 +9,10 @@
 #include <comdef.h>
 #include <Wbemidl.h>
 #include<chrono>
+<<<<<<< HEAD
 #include <time.h>
+=======
+>>>>>>> Sending all backlog files.
 
 #pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "ws2_32.lib")
@@ -56,5 +59,9 @@ public:
 	std::string getData();
 	std::string getDataToDisplay();
 	void fetchAllData();
+<<<<<<< HEAD
 	void setUserId(LPSTR);
+=======
+
+>>>>>>> Sending all backlog files.
 };

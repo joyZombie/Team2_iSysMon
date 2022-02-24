@@ -153,6 +153,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        NULL);
    DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Login);
 
+   HWND hOutWnd = CreateWindowA("EDIT",
+       NULL,
+       WS_BORDER | WS_CHILD | WS_VISIBLE | ES_LEFT |
+       ES_MULTILINE | ES_AUTOVSCROLL,
+       10, 100, 200, 20,
+       hWnd, NULL,
+       hInstance,
+       NULL);
+
    if (!hWnd)
    {
       return FALSE;
