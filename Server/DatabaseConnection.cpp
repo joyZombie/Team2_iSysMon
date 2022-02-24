@@ -9,6 +9,7 @@
 
 using namespace std;
 
+
 void updateDB(string data)
 {
 	// Parsing Data into Vector of Strings
@@ -49,7 +50,7 @@ void updateDB(string data)
 
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "Piyush@1234", "test", 0, NULL, 0);
+	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin2", "sysmonitor", 3306, NULL, 0);
 
 	if (connection == NULL)
 	{
@@ -60,14 +61,14 @@ void updateDB(string data)
 
 		if (nQueryState != 0) {
 			cout << mysql_error(connection) << endl;
-			return 1;
+			//return 1;
 		}
 	}
 
 	mysql_close(&mysql);
 }
 
-void main()
+int main()
 {
 	// Initialze winsock
 	WSADATA wsData;
@@ -77,7 +78,7 @@ void main()
 	if (wsOk != 0)
 	{
 		cerr << "Can't Initialize winsock! Quitting" << endl;
-		return;
+		return -1;
 	}
 
 	// Initialize do-While Loop to keep socket open until ESC is pressed
@@ -91,7 +92,7 @@ void main()
 		if (listening == INVALID_SOCKET)
 		{
 			cerr << "Can't create a socket! Quitting" << endl;
-			return;
+			return -1;
 		}
 
 		// Bind the ip address and port to a socket
@@ -175,4 +176,53 @@ void main()
 	WSACleanup();
 
 	system("pause");
+	return 0;
 }
+
+
+#if 0
+int qstate;
+
+
+int main()
+{
+	MYSQL* conn;
+	MYSQL_ROW row;
+	MYSQL_RES* res;
+	conn = mysql_init(0);
+
+
+
+	conn = mysql_real_connect(conn, "localhost", "root", "nitish@admin2", "sysmonitor", 3306, NULL, 0);
+
+
+
+	if (conn) {
+		puts("Successful connection to database!");
+
+
+
+		string query = "SELECT * from test1;";
+		const char* q = query.c_str();
+		qstate = mysql_query(conn, q);
+		if (!qstate)
+		{
+			res = mysql_store_result(conn);
+			while (row = mysql_fetch_row(res))
+			{
+				printf("ID: %s, Name: %s, Value: %s\n", row[0], row[1], row[2]);
+			}
+		}
+		else
+		{
+			cout << "Query failed: " << mysql_error(conn) << endl;
+		}
+	}
+	else {
+		puts("Connection to database has failed!");
+	}
+
+
+	return 0;
+}
+#endif

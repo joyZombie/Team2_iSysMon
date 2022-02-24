@@ -1,12 +1,11 @@
-#include "sysinteraction.h"
+#include "Client.h"
 #include <iostream>
 #include <WS2tcpip.h>
 
 using namespace std;
 
-int SendData(string FileName)
+int SendData(string stats)
 {
-	SystemInformation si;
 	string ipaddress = "127.0.0.1";			// ip address of the server
 	int port = 8080;						// listening port # on the server
 	
@@ -53,13 +52,11 @@ int SendData(string FileName)
 	// this needs modification to work for client side data fetching. modify as needed.
 	// stored data for passing to the server only one time. further modification can add more robustness
 	char buf[4096];
-	string userinput;
-	userinput = si.getFile(FileName);
 
-	if (userinput.size() > 0)				// make sure the user has typed in something
+	if (stats.size() > 0)				// make sure the user has typed in something
 	{
 		// send the text
-		int sendresult = send(sock, userinput.c_str(), userinput.size() + 1, 0);
+		int sendresult = send(sock, stats.c_str(), stats.size() + 1, 0);
 		if (sendresult != SOCKET_ERROR)
 		{
 			// waiting for response

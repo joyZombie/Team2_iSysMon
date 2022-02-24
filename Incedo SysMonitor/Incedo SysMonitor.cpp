@@ -5,6 +5,8 @@
 #include "Incedo SysMonitor.h"
 #include "sysinteraction.h"
 #include "Timer.h"
+#include "FileReader.h"
+#include "FileWriter.h"
 #include <iostream>
 
 #define MAX_LOADSTRING 100
@@ -148,6 +150,15 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        hInstance,
        NULL);
 
+   HWND hOutWnd = CreateWindowA("EDIT",
+       NULL,
+       WS_BORDER | WS_CHILD | WS_VISIBLE | ES_LEFT |
+       ES_MULTILINE | ES_AUTOVSCROLL,
+       10, 100, 200, 20,
+       hWnd, NULL,
+       hInstance,
+       NULL);
+
    if (!hWnd)
    {
       return FALSE;
@@ -245,8 +256,12 @@ void updateStats()
 
 void sendPeriodicData() 
 {
-    string FileName = systemInformation.putInFile();
+    string FileName = FileWriter::putInFile(systemInformation);
     int res = 0;
-    res = SendData(FileName);
-    if (res == 1) systemInformation.deleteFile(FileName);
+    res = SendData(FileReader::getFile(FileName));
+    if (res == 1)
+    {
+        FileWriter::deleteFile(FileName);
+        FileReader::sendRemainingData();
+    }
 }
