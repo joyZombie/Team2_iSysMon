@@ -2,6 +2,7 @@
 
 int main()
 {
+	char echo_message[8] = "";
 	// Initialze winsock
 	WSADATA wsData;
 	WORD ver = MAKEWORD(2, 2);
@@ -87,10 +88,12 @@ int main()
 			}
 
 			string data = string(buf, 0, bytesReceived);
-			updateDB(data);
+			strcpy(echo_message, "updated");
+
+			updateDB(data,echo_message);
 			cout << data << endl;
 			// Echo message back to client
-			send(clientSocket, buf, bytesReceived + 1, 0);
+			send(clientSocket, echo_message, bytesReceived + 1, 0);
 
 		}
 
