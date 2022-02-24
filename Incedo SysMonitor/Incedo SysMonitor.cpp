@@ -27,6 +27,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -150,14 +151,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        hInstance,
        NULL);
 
-   HWND hOutWnd = CreateWindowA("EDIT",
-       NULL,
-       WS_BORDER | WS_CHILD | WS_VISIBLE | ES_LEFT |
-       ES_MULTILINE | ES_AUTOVSCROLL,
-       10, 100, 200, 20,
-       hWnd, NULL,
-       hInstance,
-       NULL);
 
    if (!hWnd)
    {
@@ -169,6 +162,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    return TRUE;
 }
+
+
+
+
 
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -197,8 +194,9 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
                 DestroyWindow(hWnd);
                 break;
             case START_BUTTON:
-                startTimer(TIMER_DURATION);
-                MessageBox(NULL, (LPCWSTR)L"Started.", (LPCWSTR)L"Started", MB_OK);
+                DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Login);
+                /*startTimer(TIMER_DURATION);
+                MessageBox(NULL, (LPCWSTR)L"Started.", (LPCWSTR)L"Started", MB_OK);*/
                 break;
             case STOP_BUTTON:
                 stopTimer();
@@ -238,6 +236,32 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
 
     case WM_COMMAND:
         if (LOWORD(wParam) == IDOK || LOWORD(wParam) == IDCANCEL)
+        {
+            EndDialog(hDlg, LOWORD(wParam));
+            return (INT_PTR)TRUE;
+        }
+        break;
+    }
+    return (INT_PTR)FALSE;
+}
+
+INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+    switch (message)
+    {
+    case WM_INITDIALOG:
+        return (INT_PTR)TRUE;
+
+    case WM_COMMAND:
+        if (LOWORD(wParam) == IDOK1)
+        {
+            LPSTR text = new char[128];
+            GetWindowTextA(GetDlgItem(hDlg, IDC_EDIT1), text, 128);
+            MessageBoxA(NULL, text, text, MB_OK);
+            delete[] text;
+        }
+        if(LOWORD(wParam) == IDCANCEL1)
         {
             EndDialog(hDlg, LOWORD(wParam));
             return (INT_PTR)TRUE;
