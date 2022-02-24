@@ -26,6 +26,7 @@ class SystemInformation
 {
 
 private:
+	std::string userId{};
 	std::string hostName{};
 	std::string userName{};
 	unsigned int totalRam{};
@@ -54,5 +55,5 @@ public:
 	std::string getData();
 	std::string getDataToDisplay();
 	void fetchAllData();
-
+	void setUserId(LPSTR);
 };
