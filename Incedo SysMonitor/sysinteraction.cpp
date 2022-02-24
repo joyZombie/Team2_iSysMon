@@ -205,6 +205,7 @@ std::string SystemInformation::getData()
 {
 	std::stringstream data;
 	fetchHostName();
+	data << userId << ",";
 	data << hostName << ",";
 	data  << userName << ",";
 	data << totalRam << ' ' << ",";
@@ -227,6 +228,7 @@ std::string SystemInformation::getData()
 std::string SystemInformation::getDataToDisplay()
 {
 	std::stringstream data;
+	data << "User ID: " << userId << " \n";
 	data << "HostName: " << hostName << " \n";
 	data << "UserName: " << userName << " \n";
 	data << "Total Ram: " << totalRam << ' ' << "MB\n";
@@ -258,4 +260,11 @@ void SystemInformation::fetchAllData()
 	getHardDiskSpace();
 	getCurrentTime();
 }
+
+
+void SystemInformation::setUserId(LPSTR id)
+{
+	this->userId = std::string(id);
+}
+
 
