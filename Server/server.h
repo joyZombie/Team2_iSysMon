@@ -22,10 +22,12 @@ string verifyUserId(string userId);
 =======
 
 #pragma comment (lib, "ws2_32.lib")
+#pragma warning(disable : 4996)
 
 using namespace std;
 
-void updateDB(string data);
+
+void updateDB(string data,char * echo_message);
 void createDB();
 void SelectiveData();
 >>>>>>> Added new fields and integrated server

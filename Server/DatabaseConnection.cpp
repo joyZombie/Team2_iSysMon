@@ -11,8 +11,12 @@ using namespace std;
 =======
 >>>>>>> Added new fields and integrated server
 
+<<<<<<< HEAD
 void updateDB(string data)
 >>>>>>> Sending all backlog files.
+=======
+void updateDB(string data,char * echo_message)
+>>>>>>> DB connection handling
 {
 	vector<string> dataItems;
 	string item = "";

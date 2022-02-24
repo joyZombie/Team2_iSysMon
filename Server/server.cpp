@@ -103,12 +103,18 @@ int main()
 
 			string data = string(buf, 0, bytesReceived);
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(echo_message, "updated");
 
 			updateDB(data,echo_message);
 =======
 			updateDB(data);
 >>>>>>> Added new fields and integrated server
+=======
+			strcpy(echo_message, "updated");
+
+			updateDB(data,echo_message);
+>>>>>>> DB connection handling
 			cout << data << endl;
 			// Echo message back to client
 			send(clientSocket, echo_message, bytesReceived + 1, 0);
