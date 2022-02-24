@@ -1,4 +1,6 @@
-#include "sysinteraction.h"
+#include "FileReader.h"
+#include "FileWriter.h"
+#include "Client.h"
 #include <windows.h>
 #include <tchar.h> 
 #include <stdio.h>
@@ -9,19 +11,43 @@
 #include <algorithm>
 #pragma comment(lib, "User32.lib")
 
-string SystemInformation::getFile(string FileName)
+using namespace std;
+
+string FileReader::getFile(string FileName, bool containPath)
+{
+	ifstream statsFile;
+	string data;
+	if (containPath)
+	{
+		statsFile.open(FileName);
+	}
+	else
+	{
+		statsFile.open("Data/" + FileName);
+	}
+	
+	while (statsFile.good())
+	{
+		string currLine;
+		getline(statsFile, currLine);
+		data += currLine;
+	}
+	return data;
+}
+
+void FileReader::sendRemainingData()
 {
 	vector<string> files;
 	string Directory = "Data";
 
 	FILE* pipe = NULL;
-	string pCmd = "dir /B /S " + string(Directory);
+	string pCmd = "dir /B " + string(Directory);
 	char buf[256];
 
 	if (NULL == (pipe = _popen(pCmd.c_str(), "rt")))
 	{
 		cout << "Oops..." << endl;
-		return "Hello\n";
+		return;
 	}
 
 	while (!feof(pipe))
@@ -39,24 +65,11 @@ string SystemInformation::getFile(string FileName)
 	string Data;
 	while (it != files.end())
 	{
-
-		ifstream StatsFile;
-
-		string path = *it;
-		replace(path.begin(), path.end(), '\\', '/');
-		
-		int path_size = path.size();
-		path = path.substr(0, path_size - 1);
-		StatsFile.open(path);
-
-		while (StatsFile.good()) {
-			string Line;
-			getline(StatsFile, Line);
-			Data += Line;
-
-		}
+		int res = 0;
+		string name = *it;
+		name.pop_back();
+		res = SendData(FileReader::getFile(name));
+		if (res == 1) FileWriter::deleteFile(name);
 		it++;
 	}
-	
-	return Data;
 }
