@@ -1,6 +1,6 @@
 #include "server.h"
 
-void updateDB(string data)
+void updateDB(string data,char * echo_message)
 {
 	// Parsing Data into Vector of Strings
 	vector<string> dataStream;
@@ -44,12 +44,14 @@ void updateDB(string data)
 
 	if (connection == NULL)
 	{
+		strcpy(echo_message, "failed");
 		cout << mysql_error(&mysql) << endl;
 	}
 	else {
 		nQueryState = mysql_query(&mysql, ss.str().c_str());
 
 		if (nQueryState != 0) {
+			strcpy(echo_message, "failed");
 			cout << mysql_error(connection) << endl;
 			//return 1;
 		}
