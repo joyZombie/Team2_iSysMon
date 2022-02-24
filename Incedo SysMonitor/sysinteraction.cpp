@@ -196,6 +196,7 @@ void SystemInformation::getCurrentTime()
 		auto start = std::chrono::system_clock::now();
 		auto legacyStart = std::chrono::system_clock::to_time_t(start);
 		char tmBuff[30];
+		time_t now = time(0);
 		ctime_s(tmBuff, sizeof(tmBuff), &legacyStart);
 		this->tmBuff = std::string(tmBuff);
 }
@@ -218,6 +219,7 @@ std::string SystemInformation::getData()
 	data << totalSpace << ",";
 	data << freeSpace << ",";
 	data << tmBuff << ",";
+	data << long(time(0)) << ",";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";
@@ -241,6 +243,7 @@ std::string SystemInformation::getDataToDisplay()
 	data << "Total Hard Disk Space: " << totalSpace << ' ' << "MB\n";
 	data << "Free Hard Disk Space: " << freeSpace << ' ' << "MB\n";
 	data << "Current Time: " << tmBuff << ' ' << "\n";
+	data << "Time in seconds: " << long(time(0)) << ' ' << "\n";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";

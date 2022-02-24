@@ -1,16 +1,6 @@
-#if 0
+#include "server.h"
 
-
-#include <iostream>
-#include <WS2tcpip.h>
-#include <string>
-
-#pragma comment (lib, "ws2_32.lib")
-
-using namespace std;
-
-
-void main()
+int main()
 {
 	// Initialze winsock
 	WSADATA wsData;
@@ -20,7 +10,7 @@ void main()
 	if (wsOk != 0)
 	{
 		cerr << "Can't Initialize winsock! Quitting" << endl;
-		return;
+		return -1;
 	}
 
 	// Initialize do-While Loop to keep socket open until ESC is pressed
@@ -34,7 +24,7 @@ void main()
 		if (listening == INVALID_SOCKET)
 		{
 			cerr << "Can't create a socket! Quitting" << endl;
-			return;
+			return -1;
 		}
 
 		// Bind the ip address and port to a socket
@@ -96,8 +86,9 @@ void main()
 				break;
 			}
 
-			cout << string(buf, 0, bytesReceived) << endl;
-
+			string data = string(buf, 0, bytesReceived);
+			updateDB(data);
+			cout << data << endl;
 			// Echo message back to client
 			send(clientSocket, buf, bytesReceived + 1, 0);
 
@@ -117,8 +108,5 @@ void main()
 	WSACleanup();
 
 	system("pause");
+	return 0;
 }
-
-#endif
-
-
