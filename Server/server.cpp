@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 #include "server.h"
 =======
 #if 0
@@ -9,6 +10,10 @@
 #include <string>
 >>>>>>> Sending all backlog files.
 
+=======
+#include "server.h"
+
+>>>>>>> Added new fields and integrated server
 int main()
 {
 	char echo_message[8] = "";
@@ -97,9 +102,13 @@ int main()
 			}
 
 			string data = string(buf, 0, bytesReceived);
+<<<<<<< HEAD
 			strcpy(echo_message, "updated");
 
 			updateDB(data,echo_message);
+=======
+			updateDB(data);
+>>>>>>> Added new fields and integrated server
 			cout << data << endl;
 			// Echo message back to client
 			send(clientSocket, echo_message, bytesReceived + 1, 0);
@@ -123,9 +132,12 @@ int main()
 	return 0;
 }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 #endif
 
 
 >>>>>>> Sending all backlog files.
+=======
+>>>>>>> Added new fields and integrated server

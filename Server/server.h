@@ -4,6 +4,7 @@
 #include <vector>
 #include <mysql.h>
 #include <sstream>
+<<<<<<< HEAD
 #include <boost\crc.hpp>
 
 #pragma comment (lib, "ws2_32.lib")
@@ -18,3 +19,13 @@ void dbConnect(vector<string> dataStream);
 void createDB();
 void SelectiveData();
 string verifyUserId(string userId);
+=======
+
+#pragma comment (lib, "ws2_32.lib")
+
+using namespace std;
+
+void updateDB(string data);
+void createDB();
+void SelectiveData();
+>>>>>>> Added new fields and integrated server

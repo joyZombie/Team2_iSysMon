@@ -1,4 +1,5 @@
 #include "server.h"
+<<<<<<< HEAD
 
 <<<<<<< HEAD
 vector<string> dataParser(string data)
@@ -7,6 +8,8 @@ vector<string> dataParser(string data)
 
 using namespace std;
 
+=======
+>>>>>>> Added new fields and integrated server
 
 void updateDB(string data)
 >>>>>>> Sending all backlog files.
@@ -53,7 +56,7 @@ void dbConnect(vector<string> dataStream, char* echo_message)
  
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin2", "sysmonitor", 3306, NULL, 0);
+	connection = mysql_real_connect(&mysql, "localhost", "root", "Adarsh08$", "sysmonitor", 3306, NULL, 0);
 
 	if (connection == NULL)
 	{
@@ -74,6 +77,7 @@ void dbConnect(vector<string> dataStream, char* echo_message)
 	mysql_close(&mysql);
 }
 
+<<<<<<< HEAD
 <<<<<<< HEAD
 void updateDB(string data,char * echo_message)
 =======
@@ -257,3 +261,5 @@ int main()
 }
 #endif
 >>>>>>> Sending all backlog files.
+=======
+>>>>>>> Added new fields and integrated server
