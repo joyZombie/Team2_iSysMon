@@ -9,6 +9,7 @@
 #include <comdef.h>
 #include <Wbemidl.h>
 #include<chrono>
+#include <time.h>
 
 #pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "ws2_32.lib")
