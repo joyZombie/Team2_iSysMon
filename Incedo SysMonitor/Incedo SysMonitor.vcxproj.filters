@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Client">
       <UniqueIdentifier>{07f198b1-cc72-464d-ac48-6f7a45bccdca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Client">
+      <UniqueIdentifier>{a8d8376a-7ad5-4548-9f29-4285edc2ce76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -40,6 +43,15 @@
       <Filter>Header Files\SystemInteraction</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWriter.h">
       <Filter>Header Files\SystemInteraction</Filter>
     </ClInclude>
   </ItemGroup>

@@ -9,7 +9,8 @@
 #include <comdef.h>
 #include <Wbemidl.h>
 #include<chrono>
-# pragma comment(lib, "wbemuuid.lib")
+
+#pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "ws2_32.lib")
 #pragma once
 #define HOSTNAME_SIZE 128
@@ -52,9 +53,6 @@ public:
 	SystemInformation() = default;
 	std::string getData();
 	std::string getDataToDisplay();
-	string putInFile();
 	void fetchAllData();
-	string getFile(string FileName);
-	void deleteFile(string Filename);
 
 };

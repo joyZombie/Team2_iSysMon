@@ -1,3 +1,6 @@
+#if 0
+
+
 #include <iostream>
 #include <WS2tcpip.h>
 #include <string>
@@ -115,5 +118,7 @@ void main()
 
 	system("pause");
 }
+
+#endif
 
 
