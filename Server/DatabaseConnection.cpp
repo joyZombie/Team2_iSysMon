@@ -64,7 +64,7 @@ void dbConnect(vector<string> dataStream, char* echo_message)
  
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin", "sysmonitor", 3306, NULL, 0);
+	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin2", "sysmonitor", 3306, NULL, 0);
 
 	if (connection == NULL)
 	{

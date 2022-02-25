@@ -18,6 +18,7 @@ vector<string> dataParser(string data);
 void dbConnect(vector<string> dataStream);
 void createDB();
 void SelectiveData();
+<<<<<<< HEAD
 string verifyUserId(string userId);
 =======
 
@@ -31,3 +32,6 @@ void updateDB(string data,char * echo_message);
 void createDB();
 void SelectiveData();
 >>>>>>> Added new fields and integrated server
+=======
+string verifyUserId(string userId);
+>>>>>>> Made primary key and handled verification.

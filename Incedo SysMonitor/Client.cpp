@@ -100,6 +100,17 @@ int SendData(string userinput)
 			int bytesreceived = recv(sock, buf, 4096, 0);
 			if (bytesreceived > 0)
 			{
+				string res = "";
+				int i = 0;
+				while (buf[i] != '\0') {
+					res += buf[i];
+					i++;
+				}
+				if (res == "failed") {
+					closesocket(sock);
+					WSACleanup();
+					return -1;
+				}
 				// echo client response to console
 				cout << "server> " << string(buf, 0, bytesreceived) << endl;
 			}
