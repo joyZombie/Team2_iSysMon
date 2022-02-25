@@ -4,6 +4,7 @@
 #include <vector>
 #include <mysql.h>
 #include <sstream>
+#include <boost\crc.hpp>
 
 #pragma comment (lib, "ws2_32.lib")
 #pragma warning(disable : 4996)
