@@ -258,6 +258,12 @@ INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         {
             LPSTR text = new char[128];
             GetWindowTextA(GetDlgItem(hDlg, IDC_EDIT1), text, 128);
+            if (strlen(text) < 1)
+            {
+                EndDialog(hDlg, LOWORD(wParam));
+                DestroyWindow(hWnd);
+                return (INT_PTR)TRUE;
+            }
             systemInformation.setUserId(text);
             //MessageBoxA(NULL, text, text, MB_OK);
             delete[] text;
