@@ -14,3 +14,4 @@ using namespace std;
 void updateDB(string data,char * echo_message);
 void createDB();
 void SelectiveData();
+string verifyUserId(string userId);
