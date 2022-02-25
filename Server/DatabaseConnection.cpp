@@ -44,6 +44,7 @@ vector<string> dataParser(string data)
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void dbConnect(vector<string> dataStream, char* echo_message)
 {
 =======
@@ -51,6 +52,9 @@ void dbConnect(vector<string> dataStream, char* echo_message)
 >>>>>>> Integrated database.
 =======
 void dbConnect(vector<string> dataStream)
+=======
+void dbConnect(vector<string> dataStream, char* echo_message)
+>>>>>>> Minor bug fixes.
 {
 >>>>>>> Added parser and CRC methods
 	// Opening DB Connection
@@ -134,6 +138,7 @@ void updateDB(string data,char * echo_message)
 	}
 
 	dataStream = dataParser(information);
+<<<<<<< HEAD
 <<<<<<< HEAD
 	dbConnect(dataStream, echo_message);
 }
@@ -293,6 +298,9 @@ int main()
 >>>>>>> Added new fields and integrated server
 =======
 	dbConnect(dataStream);
+=======
+	dbConnect(dataStream, echo_message);
+>>>>>>> Minor bug fixes.
 }
 
 >>>>>>> Added parser and CRC methods
