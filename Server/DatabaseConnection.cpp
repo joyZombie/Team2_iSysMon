@@ -19,7 +19,7 @@ vector<string> dataParser(string data)
 	return dataItems;
 }
 
-void dbConnect(vector<string> dataStream)
+void dbConnect(vector<string> dataStream, char* echo_message)
 {
 	// Opening DB Connection
 	MYSQL mysql, * connection;
@@ -89,6 +89,6 @@ void updateDB(string data,char * echo_message)
 	}
 
 	dataStream = dataParser(information);
-	dbConnect(dataStream);
+	dbConnect(dataStream, echo_message);
 }
 
