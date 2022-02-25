@@ -31,12 +31,16 @@ void updateDB(string data,char * echo_message)
 			item = "";
 		}
 	}
+<<<<<<< HEAD
 
 	return dataItems;
 }
 
 void dbConnect(vector<string> dataStream, char* echo_message)
 {
+=======
+	while (int(dataStream.size()) > 13) dataStream.pop_back();
+>>>>>>> Integrated database.
 	// Opening DB Connection
 	MYSQL mysql, * connection;
 	MYSQL_RES result;
@@ -60,7 +64,7 @@ void dbConnect(vector<string> dataStream, char* echo_message)
  
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "Adarsh08$", "sysmonitor", 3306, NULL, 0);
+	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin", "sysmonitor", 3306, NULL, 0);
 
 	if (connection == NULL)
 	{

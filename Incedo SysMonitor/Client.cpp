@@ -1,4 +1,4 @@
-#include "Client.h"
+#include "sysinteraction.h"
 #include <iostream>
 #include <WS2tcpip.h>
 #include <boost\crc.hpp>
@@ -6,11 +6,16 @@
 using namespace std;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 int SendData(string userinput)
 =======
 int SendData(string stats)
 >>>>>>> Sending all backlog files.
+=======
+int SendData(string userinput)
+>>>>>>> Integrated database.
 {
+	SystemInformation si;
 	string ipaddress = "127.0.0.1";			// ip address of the server
 	int port = 8080;						// listening port # on the server
 
@@ -58,6 +63,7 @@ int SendData(string stats)
 	// stored data for passing to the server only one time. further modification can add more robustness
 	char buf[4096];
 <<<<<<< HEAD
+<<<<<<< HEAD
 	string hash;
 	stringstream checkSum;
 
@@ -70,11 +76,23 @@ int SendData(string stats)
 	userinput = userinput + "#" + hash;
 =======
 >>>>>>> Sending all backlog files.
+=======
+	string hash;
+	stringstream checkSum;
+>>>>>>> Integrated database.
 
-	if (stats.size() > 0)				// make sure the user has typed in something
+	boost::crc_32_type  crc;
+
+	crc.process_bytes(userinput.data(), userinput.size());
+	checkSum << hex << crc.checksum();
+	hash = checkSum.str();
+
+	userinput = userinput + "#" + hash;
+
+	if (userinput.size() > 0)				// make sure the user has typed in something
 	{
 		// send the text
-		int sendresult = send(sock, stats.c_str(), stats.size() + 1, 0);
+		int sendresult = send(sock, userinput.c_str(), userinput.size() + 1, 0);
 		if (sendresult != SOCKET_ERROR)
 		{
 			// waiting for response
@@ -82,17 +100,6 @@ int SendData(string stats)
 			int bytesreceived = recv(sock, buf, 4096, 0);
 			if (bytesreceived > 0)
 			{
-				string res = "";
-				int i = 0;
-				while (buf[i] != '\0') {
-					res += buf[i];
-					i++;
-				}
-				if (res == "failed") {
-					closesocket(sock);
-					WSACleanup();
-					return -1;
-				}
 				// echo client response to console
 				cout << "server> " << string(buf, 0, bytesreceived) << endl;
 			}
