@@ -5,6 +5,9 @@
 #include <mysql.h>
 #include <sstream>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added boost library
 #include <boost\crc.hpp>
 
 #pragma comment (lib, "ws2_32.lib")
@@ -18,6 +21,7 @@ vector<string> dataParser(string data);
 void dbConnect(vector<string> dataStream);
 void createDB();
 void SelectiveData();
+<<<<<<< HEAD
 <<<<<<< HEAD
 string verifyUserId(string userId);
 =======
@@ -35,3 +39,6 @@ void SelectiveData();
 =======
 string verifyUserId(string userId);
 >>>>>>> Made primary key and handled verification.
+=======
+string verifyUserId(string userId);
+>>>>>>> Added boost library
