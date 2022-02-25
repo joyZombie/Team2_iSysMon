@@ -2,6 +2,7 @@
 <<<<<<< HEAD
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 vector<string> dataParser(string data)
 =======
 #pragma comment (lib, "ws2_32.lib")
@@ -17,6 +18,9 @@ void updateDB(string data)
 =======
 void updateDB(string data,char * echo_message)
 >>>>>>> DB connection handling
+=======
+vector<string> dataParser(string data)
+>>>>>>> Added parser and CRC methods
 {
 	vector<string> dataItems;
 	string item = "";
@@ -32,15 +36,23 @@ void updateDB(string data,char * echo_message)
 		}
 	}
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added parser and CRC methods
 
 	return dataItems;
 }
 
+<<<<<<< HEAD
 void dbConnect(vector<string> dataStream, char* echo_message)
 {
 =======
 	while (int(dataStream.size()) > 13) dataStream.pop_back();
 >>>>>>> Integrated database.
+=======
+void dbConnect(vector<string> dataStream)
+{
+>>>>>>> Added parser and CRC methods
 	// Opening DB Connection
 	MYSQL mysql, * connection;
 	MYSQL_RES result;
@@ -87,10 +99,14 @@ void dbConnect(vector<string> dataStream, char* echo_message)
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 void updateDB(string data,char * echo_message)
 =======
 int main()
 >>>>>>> Sending all backlog files.
+=======
+void updateDB(string data,char * echo_message)
+>>>>>>> Added parser and CRC methods
 {
 	// Parsing Data into Vector of Strings
 	vector<string> dataStream;
@@ -110,11 +126,15 @@ int main()
 	if (hash != checkSum.str())
 	{
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added parser and CRC methods
 		cout << "Checksum mismatch...Data Corrupted !!\nAborted the process.\n";
 		return;
 	}
 
 	dataStream = dataParser(information);
+<<<<<<< HEAD
 	dbConnect(dataStream, echo_message);
 }
 
@@ -271,3 +291,8 @@ int main()
 >>>>>>> Sending all backlog files.
 =======
 >>>>>>> Added new fields and integrated server
+=======
+	dbConnect(dataStream);
+}
+
+>>>>>>> Added parser and CRC methods
