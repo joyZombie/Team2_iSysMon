@@ -13,6 +13,8 @@ using namespace std;
 
 
 void updateDB(string data,char * echo_message);
+vector<string> dataParser(string data);
+void dbConnect(vector<string> dataStream);
 void createDB();
 void SelectiveData();
 string verifyUserId(string userId);
