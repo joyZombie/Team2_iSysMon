@@ -40,7 +40,7 @@ void updateDB(string data,char * echo_message)
 
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin", "sysmonitor", 3306, NULL, 0);
+	connection = mysql_real_connect(&mysql, "localhost", "root", "nitish@admin2", "sysmonitor", 3306, NULL, 0);
 
 	if (connection == NULL)
 	{
@@ -48,8 +48,10 @@ void updateDB(string data,char * echo_message)
 		cout << mysql_error(&mysql) << endl;
 	}
 	else {
-		nQueryState = mysql_query(&mysql, ss.str().c_str());
+		mysql_query(&mysql, verifyUserId(dataStream[0]).c_str());
 
+		nQueryState = mysql_query(&mysql, ss.str().c_str());
+		
 		if (nQueryState != 0) {
 			strcpy(echo_message, "failed");
 			cout << mysql_error(connection) << endl;
