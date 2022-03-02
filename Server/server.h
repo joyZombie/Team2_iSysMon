@@ -6,6 +6,7 @@
 #include <sstream>
 #include <boost\crc.hpp>
 
+#pragma comment(lib, "User32.lib")
 #pragma comment (lib, "ws2_32.lib")
 #pragma warning(disable : 4996)
 
@@ -14,7 +15,7 @@ using namespace std;
 
 void updateDB(string data,char * echo_message);
 vector<string> dataParser(string data);
-void dbConnect(vector<string> dataStream);
+void dbConnect(vector<string> dataStream,char* echo_message);
 void createDB();
 void SelectiveData();
 string verifyUserId(string userId);
