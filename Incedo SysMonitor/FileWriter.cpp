@@ -9,6 +9,7 @@ using namespace std;
 
 string FileWriter::putInFile(SystemInformation si)
 {
+	_mkdir("Data/");
 	time_t result = std::time(nullptr);
 	string FileName = ctime(&result);
 	FileName = FileName.substr(0, FileName.size() - 1);
