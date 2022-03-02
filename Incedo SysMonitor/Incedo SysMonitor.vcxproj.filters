@@ -39,7 +39,7 @@
     <ClInclude Include="Incedo SysMonitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sysinteraction.h">
+    <ClInclude Include="SystemInformation.h">
       <Filter>Header Files\SystemInteraction</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
@@ -59,7 +59,7 @@
     <ClCompile Include="Incedo SysMonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sysinteraction.cpp">
+    <ClCompile Include="SystemInformation.cpp">
       <Filter>Source Files\SystemInteraction</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">

@@ -1,4 +1,4 @@
-#include "sysinteraction.h"
+#include "SystemInformation.h"
 #include <Windows.h>
 #include <stdio.h>
 #include <map>

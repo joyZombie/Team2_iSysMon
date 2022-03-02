@@ -3,7 +3,7 @@
 
 #include "framework.h"
 #include "Incedo SysMonitor.h"
-#include "sysinteraction.h"
+#include "SystemInformation.h"
 #include "Timer.h"
 #include "FileReader.h"
 #include "FileWriter.h"

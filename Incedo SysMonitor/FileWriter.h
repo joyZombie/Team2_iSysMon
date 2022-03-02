@@ -1,4 +1,4 @@
-#include "sysinteraction.h"
+#include "SystemInformation.h"
 #include <string>
 
 #pragma once
