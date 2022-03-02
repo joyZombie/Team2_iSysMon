@@ -1,13 +1,12 @@
-#include "sysinteraction.h"
 #include <iostream>
 #include <WS2tcpip.h>
+#include <sstream>
 #include <boost\crc.hpp>
 
 using namespace std;
 
 int SendData(string userinput)
 {
-	SystemInformation si;
 	string ipaddress = "127.0.0.1";			// ip address of the server
 	int port = 8080;						// listening port # on the server
 

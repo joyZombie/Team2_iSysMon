@@ -147,7 +147,7 @@
     <ClInclude Include="framework.h" />
     <ClInclude Include="Incedo SysMonitor.h" />
     <ClInclude Include="Resource.h" />
-    <ClInclude Include="sysinteraction.h" />
+    <ClInclude Include="SystemInformation.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="Timer.h" />
   </ItemGroup>
@@ -156,7 +156,7 @@
     <ClCompile Include="FileReader.cpp" />
     <ClCompile Include="FileWriter.cpp" />
     <ClCompile Include="Incedo SysMonitor.cpp" />
-    <ClCompile Include="sysinteraction.cpp" />
+    <ClCompile Include="SystemInformation.cpp" />
     <ClCompile Include="Timer.cpp" />
   </ItemGroup>
   <ItemGroup>

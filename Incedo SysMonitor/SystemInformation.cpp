@@ -1,4 +1,4 @@
-#include "sysinteraction.h"
+#include "SystemInformation.h"
 #define _WIN32_DCOM
 # pragma comment(lib, "wbemuuid.lib")
 
