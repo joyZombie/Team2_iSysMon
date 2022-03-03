@@ -13,6 +13,9 @@
 
 using namespace std;
 
+#define DIR "Data/"
+#define FILE_BUF 256
+
 string FileReader::getFile(string FileName, bool containPath)
 {
 	ifstream statsFile;
@@ -23,7 +26,7 @@ string FileReader::getFile(string FileName, bool containPath)
 	}
 	else
 	{
-		statsFile.open("Data/" + FileName);
+		statsFile.open(DIR + FileName);
 	}
 	
 	while (statsFile.good())
@@ -42,7 +45,7 @@ void FileReader::sendRemainingData()
 
 	FILE* pipe = NULL;
 	string pCmd = "dir /B " + string(Directory);
-	char buf[256];
+	char buf[FILE_BUF];
 
 	if (NULL == (pipe = _popen(pCmd.c_str(), "rt")))
 	{
@@ -52,7 +55,7 @@ void FileReader::sendRemainingData()
 
 	while (!feof(pipe))
 	{
-		if (fgets(buf, 256, pipe) != NULL)
+		if (fgets(buf, FILE_BUF, pipe) != NULL)
 		{
 			files.push_back(string(buf));
 		}

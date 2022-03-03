@@ -5,10 +5,15 @@
 
 using namespace std;
 
+#define BUFFER_SIZE 4096
+#define UPDATE_FAILED "failed"
+#define IP_ADDRESS "127.0.0.1"
+#define PORT 8080
+
 int SendData(string userinput)
 {
-	string ipaddress = "127.0.0.1";			// ip address of the server
-	int port = 8080;						// listening port # on the server
+	string ipaddress = IP_ADDRESS;			// ip address of the server
+	int port = PORT;						// listening port # on the server
 
 	// initialize winsock
 	WSAData data;
@@ -52,7 +57,7 @@ int SendData(string userinput)
 
 	// this needs modification to work for client side data fetching. modify as needed.
 	// stored data for passing to the server only one time. further modification can add more robustness
-	char buf[4096];
+	char buf[BUFFER_SIZE];
 	string hash;
 	stringstream checkSum;
 
@@ -71,8 +76,8 @@ int SendData(string userinput)
 		if (sendresult != SOCKET_ERROR)
 		{
 			// waiting for response
-			ZeroMemory(buf, 4096);
-			int bytesreceived = recv(sock, buf, 4096, 0);
+			ZeroMemory(buf, BUFFER_SIZE);
+			int bytesreceived = recv(sock, buf, BUFFER_SIZE, 0);
 			if (bytesreceived > 0)
 			{
 				string res = "";
@@ -81,11 +86,11 @@ int SendData(string userinput)
 					res += buf[i];
 					i++;
 				}
-				if (res == "failed") {
+				/*if (res == UPDATE_FAILED) {
 					closesocket(sock);
 					WSACleanup();
 					return -1;
-				}
+				}*/
 				// echo client response to console
 				cout << "server> " << string(buf, 0, bytesreceived) << endl;
 			}

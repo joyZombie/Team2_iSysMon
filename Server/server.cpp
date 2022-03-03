@@ -88,7 +88,7 @@ int main()
 			}
 
 			string data = string(buf, 0, bytesReceived);
-			strcpy(echo_message, "updated");
+			strcpy(echo_message, UPDATED_SUCCESSFULLY);
 
 			updateDB(data,echo_message);
 			cout << data << endl;
