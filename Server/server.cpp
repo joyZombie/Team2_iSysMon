@@ -104,6 +104,7 @@ int main()
 			string data = string(buf, 0, bytesReceived);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 			strcpy(echo_message, "updated");
 
 			updateDB(data,echo_message);
@@ -112,6 +113,9 @@ int main()
 >>>>>>> Added new fields and integrated server
 =======
 			strcpy(echo_message, "updated");
+=======
+			strcpy(echo_message, UPDATED_SUCCESSFULLY);
+>>>>>>> Added Macros
 
 			updateDB(data,echo_message);
 >>>>>>> DB connection handling

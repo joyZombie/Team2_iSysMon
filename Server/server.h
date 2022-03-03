@@ -16,6 +16,13 @@
 
 using namespace std;
 
+#define PASSWORD "nitish@admin2"
+#define DATABASE "sysmonitor"
+#define PORT 3306
+#define USER "root"
+#define HOST "localhost"
+#define UPDATE_FAILED "failed"
+#define UPDATED_SUCCESSFULLY "updated"
 
 void updateDB(string data,char * echo_message);
 vector<string> dataParser(string data);
