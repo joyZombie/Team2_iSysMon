@@ -86,11 +86,11 @@ int SendData(string userinput)
 					res += buf[i];
 					i++;
 				}
-				/*if (res == UPDATE_FAILED) {
+				if (res == UPDATE_FAILED) {
 					closesocket(sock);
 					WSACleanup();
 					return -1;
-				}*/
+				}
 				// echo client response to console
 				cout << "server> " << string(buf, 0, bytesreceived) << endl;
 			}
