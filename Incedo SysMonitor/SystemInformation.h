@@ -9,7 +9,16 @@
 #include <comdef.h>
 #include <Wbemidl.h>
 #include<chrono>
-# pragma comment(lib, "wbemuuid.lib")
+<<<<<<< HEAD
+<<<<<<< HEAD
+#include <time.h>
+=======
+>>>>>>> Sending all backlog files.
+=======
+#include <time.h>
+>>>>>>> Added new fields and integrated server
+
+#pragma comment(lib, "wbemuuid.lib")
 #pragma comment(lib, "ws2_32.lib")
 #pragma once
 #define HOSTNAME_SIZE 128
@@ -25,6 +34,7 @@ class SystemInformation
 {
 
 private:
+	std::string userId{};
 	std::string hostName{};
 	std::string userName{};
 	unsigned int totalRam{};
@@ -52,9 +62,14 @@ public:
 	SystemInformation() = default;
 	std::string getData();
 	std::string getDataToDisplay();
-	string putInFile();
 	void fetchAllData();
-	string getFile(string FileName);
-	void deleteFile(string Filename);
+<<<<<<< HEAD
+<<<<<<< HEAD
+	void setUserId(LPSTR);
+=======
 
+>>>>>>> Sending all backlog files.
+=======
+	void setUserId(LPSTR);
+>>>>>>> Added userID
 };

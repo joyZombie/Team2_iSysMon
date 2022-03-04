@@ -3,8 +3,10 @@
 
 #include "framework.h"
 #include "Incedo SysMonitor.h"
-#include "sysinteraction.h"
+#include "SystemInformation.h"
 #include "Timer.h"
+#include "FileReader.h"
+#include "FileWriter.h"
 #include <iostream>
 
 #define MAX_LOADSTRING 100
@@ -18,6 +20,7 @@ WCHAR szTitle[MAX_LOADSTRING];                  // The title bar text
 WCHAR szWindowClass[MAX_LOADSTRING];            // the main window class name
 SystemInformation systemInformation;
 HWND systemInfo;
+HWND hWnd;
 //Timer liveDataTimer(1, updateStats);
 
 // Forward declarations of functions included in this code module:
@@ -25,6 +28,7 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+INT_PTR CALLBACK    Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam);
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -106,7 +110,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // Store instance handle in our global variable
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+   hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
       CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
 
    HWND hwndButton1 = CreateWindowW(
@@ -147,6 +151,11 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        (HMENU)START_BUTTON,       
        hInstance,
        NULL);
+   DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Login);
+<<<<<<< HEAD
+
+=======
+>>>>>>> Added userID
 
    if (!hWnd)
    {
@@ -158,6 +167,10 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 
    return TRUE;
 }
+
+
+
+
 
 //
 //  FUNCTION: WndProc(HWND, UINT, WPARAM, LPARAM)
@@ -236,6 +249,80 @@ INT_PTR CALLBACK About(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
     return (INT_PTR)FALSE;
 }
 
+INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+    switch (message)
+    {
+    case WM_INITDIALOG:
+        return (INT_PTR)TRUE;
+
+    case WM_COMMAND:
+        if (LOWORD(wParam) == IDOK1)
+        {
+            LPSTR text = new char[128];
+            GetWindowTextA(GetDlgItem(hDlg, IDC_EDIT1), text, 128);
+<<<<<<< HEAD
+            if (strlen(text) < 1)
+            {
+                EndDialog(hDlg, LOWORD(wParam));
+                DestroyWindow(hWnd);
+                return (INT_PTR)TRUE;
+            }
+            systemInformation.setUserId(text);
+            FileWriter::DIR = string(text);
+            FileReader::DIR = string(text);
+            //MessageBoxA(NULL, text, text, MB_OK);
+            delete[] text;
+            EndDialog(hDlg, LOWORD(wParam));
+        }
+        if(LOWORD(wParam) == IDCANCEL1)
+        {
+            EndDialog(hDlg, LOWORD(wParam));
+            DestroyWindow(hWnd);
+            return (INT_PTR)TRUE;
+        }
+        break;
+    }
+    return (INT_PTR)FALSE;
+}
+
+INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
+{
+    UNREFERENCED_PARAMETER(lParam);
+    switch (message)
+    {
+    case WM_INITDIALOG:
+        return (INT_PTR)TRUE;
+
+    case WM_COMMAND:
+        if (LOWORD(wParam) == IDOK1)
+        {
+            LPSTR text = new char[128];
+            GetWindowTextA(GetDlgItem(hDlg, IDC_EDIT1), text, 128);
+            MessageBoxA(NULL, text, text, MB_OK);
+=======
+            systemInformation.setUserId(text);
+            //MessageBoxA(NULL, text, text, MB_OK);
+>>>>>>> Added userID
+            delete[] text;
+            EndDialog(hDlg, LOWORD(wParam));
+        }
+        if(LOWORD(wParam) == IDCANCEL1)
+        {
+            EndDialog(hDlg, LOWORD(wParam));
+            DestroyWindow(hWnd);
+            return (INT_PTR)TRUE;
+        }
+        break;
+    }
+    return (INT_PTR)FALSE;
+}
+
+
+
+
+
 void updateStats()
 {
     systemInformation.fetchAllData();
@@ -245,8 +332,12 @@ void updateStats()
 
 void sendPeriodicData() 
 {
-    string FileName = systemInformation.putInFile();
+    string FileName = FileWriter::putInFile(systemInformation);
     int res = 0;
-    res = SendData(FileName);
-    if (res == 1) systemInformation.deleteFile(FileName);
+    res = SendData(FileReader::getFile(FileName));
+    if (res == 1)
+    {
+        FileWriter::deleteFile(FileName);
+        FileReader::sendRemainingData();
+    }
 }

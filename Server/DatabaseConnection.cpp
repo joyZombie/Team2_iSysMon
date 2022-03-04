@@ -1,28 +1,28 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
 #include "server.h"
-=======
-#if 0
-
-
-#include <iostream>
-#include <WS2tcpip.h>
-#include <string>
 <<<<<<< HEAD
-#include <vector>
-#include <mysql.h>
-#include <sstream>
 
+<<<<<<< HEAD
+<<<<<<< HEAD
+vector<string> dataParser(string data)
+=======
 #pragma comment (lib, "ws2_32.lib")
-#pragma warning(disable : 4996)
+
 using namespace std;
 
-char message[64] = "";
+=======
+>>>>>>> Added new fields and integrated server
 
+<<<<<<< HEAD
 void updateDB(string data)
+>>>>>>> Sending all backlog files.
+=======
+void updateDB(string data,char * echo_message)
+>>>>>>> DB connection handling
+=======
+vector<string> dataParser(string data)
+>>>>>>> Added parser and CRC methods
 {
-	// Parsing Data into Vector of Strings
-	vector<string> dataStream;
+	vector<string> dataItems;
 	string item = "";
 
 	for (int i = 0; i < data.size(); i++)
@@ -31,11 +31,32 @@ void updateDB(string data)
 			item = item + data[i];
 		else
 		{
-			dataStream.push_back(item);
+			dataItems.push_back(item);
 			item = "";
 		}
 	}
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added parser and CRC methods
 
+	return dataItems;
+}
+
+<<<<<<< HEAD
+<<<<<<< HEAD
+void dbConnect(vector<string> dataStream, char* echo_message)
+{
+=======
+	while (int(dataStream.size()) > 13) dataStream.pop_back();
+>>>>>>> Integrated database.
+=======
+void dbConnect(vector<string> dataStream)
+=======
+void dbConnect(vector<string> dataStream, char* echo_message)
+>>>>>>> Minor bug fixes.
+{
+>>>>>>> Added parser and CRC methods
 	// Opening DB Connection
 	MYSQL mysql, * connection;
 	MYSQL_RES result;
@@ -49,55 +70,84 @@ void updateDB(string data)
 
 	for (auto value : dataStream)
 	{
-		//cout << value << " ";
 		ss << "\'";
 		ss << value;
-		if (value != dataStream.back())
+		if(value != dataStream.back())
 			ss << "\',";
 		else
 			ss << "\');";
 	}
-	
+ 
 	// DB Code begins here 
 	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "password", "sysmonitor", 0, NULL, 0);
+	connection = mysql_real_connect(&mysql, HOST, USER, PASSWORD, DATABASE, PORT, NULL, 0);
 
 	if (connection == NULL)
 	{
-		strcpy(message, "failed");
+		strcpy(echo_message, UPDATE_FAILED);
 		cout << mysql_error(&mysql) << endl;
 	}
 	else {
-		nQueryState = mysql_query(&mysql, ss.str().c_str());
+		mysql_query(&mysql, verifyUserId(dataStream[0]).c_str());
 
+		nQueryState = mysql_query(&mysql, ss.str().c_str());
+		
 		if (nQueryState != 0) {
-			strcpy(message, "failed");
+			strcpy(echo_message, UPDATE_FAILED);
 			cout << mysql_error(connection) << endl;
+			//return 1;
 		}
 	}
-
 	mysql_close(&mysql);
 }
 
-void main()
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+void updateDB(string data,char * echo_message)
 =======
->>>>>>> Sending all backlog files.
-
-=======
-#include "server.h"
-
->>>>>>> Added new fields and integrated server
 int main()
->>>>>>> feature
+>>>>>>> Sending all backlog files.
+=======
+void updateDB(string data,char * echo_message)
+>>>>>>> Added parser and CRC methods
 {
-	char echo_message[8] = "";
-	// Initialze winsock
-	WSADATA wsData;
-	WORD ver = MAKEWORD(2, 2);
+	// Parsing Data into Vector of Strings
+	vector<string> dataStream;
+	int hashPosition = data.find("#");
+	string information, hash;
 
-	int wsOk = WSAStartup(ver, &wsData);
-	if (wsOk != 0)
+	// Fetching CRC Checksum present as the end of Data
+	information = data.substr(0, hashPosition);
+	hash = data.substr(static_cast<std::basic_string<char, std::char_traits<char>, std::allocator<char>>::size_type>(hashPosition) + 1);
+
+	// Hash verification
+	stringstream checkSum;
+	boost::crc_32_type  crc;
+	crc.process_bytes(information.data(), information.size());
+	checkSum << hex << crc.checksum();
+
+	if (hash != checkSum.str())
 	{
+<<<<<<< HEAD
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> Added parser and CRC methods
+=======
+		strcpy(echo_message, UPDATE_FAILED);
+>>>>>>> Added Macros
+		cout << "Checksum mismatch...Data Corrupted !!\nAborted the process.\n";
+		return;
+	}
+
+	dataStream = dataParser(information);
+<<<<<<< HEAD
+<<<<<<< HEAD
+	dbConnect(dataStream, echo_message);
+}
+
+=======
 		cerr << "Can't Initialize winsock! Quitting" << endl;
 		return -1;
 	}
@@ -176,35 +226,10 @@ int main()
 			}
 
 			string data = string(buf, 0, bytesReceived);
-<<<<<<< HEAD
-			cout << data << endl;
-			strcpy(message, "updated");
 			updateDB(data);
-			
-			// Echo message back to client
-			send(clientSocket, message, bytesReceived + 1, 0);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-			strcpy(echo_message, "updated");
 
-			updateDB(data,echo_message);
-=======
-			updateDB(data);
->>>>>>> Added new fields and integrated server
-=======
-			strcpy(echo_message, "updated");
-=======
-			strcpy(echo_message, UPDATED_SUCCESSFULLY);
->>>>>>> Added Macros
-
-			updateDB(data,echo_message);
->>>>>>> DB connection handling
-			cout << data << endl;
 			// Echo message back to client
-			send(clientSocket, echo_message, bytesReceived + 1, 0);
->>>>>>> feature
+			send(clientSocket, buf, bytesReceived + 1, 0);
 
 		}
 
@@ -222,19 +247,64 @@ int main()
 	WSACleanup();
 
 	system("pause");
-<<<<<<< HEAD
-}
-=======
 	return 0;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 
+
+#if 0
+int qstate;
+
+
+int main()
+{
+	MYSQL* conn;
+	MYSQL_ROW row;
+	MYSQL_RES* res;
+	conn = mysql_init(0);
+
+
+
+	conn = mysql_real_connect(conn, "localhost", "root", "nitish@admin2", "sysmonitor", 3306, NULL, 0);
+
+
+
+	if (conn) {
+		puts("Successful connection to database!");
+
+
+
+		string query = "SELECT * from test1;";
+		const char* q = query.c_str();
+		qstate = mysql_query(conn, q);
+		if (!qstate)
+		{
+			res = mysql_store_result(conn);
+			while (row = mysql_fetch_row(res))
+			{
+				printf("ID: %s, Name: %s, Value: %s\n", row[0], row[1], row[2]);
+			}
+		}
+		else
+		{
+			cout << "Query failed: " << mysql_error(conn) << endl;
+		}
+	}
+	else {
+		puts("Connection to database has failed!");
+	}
+
+
+	return 0;
+}
 #endif
-
-
 >>>>>>> Sending all backlog files.
 =======
 >>>>>>> Added new fields and integrated server
->>>>>>> feature
+=======
+	dbConnect(dataStream);
+=======
+	dbConnect(dataStream, echo_message);
+>>>>>>> Minor bug fixes.
+}
+
+>>>>>>> Added parser and CRC methods

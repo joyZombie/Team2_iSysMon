@@ -22,6 +22,9 @@
     <Filter Include="Source Files\Client">
       <UniqueIdentifier>{07f198b1-cc72-464d-ac48-6f7a45bccdca}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Client">
+      <UniqueIdentifier>{a8d8376a-7ad5-4548-9f29-4285edc2ce76}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -36,10 +39,19 @@
     <ClInclude Include="Incedo SysMonitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="sysinteraction.h">
+    <ClInclude Include="SystemInformation.h">
       <Filter>Header Files\SystemInteraction</Filter>
     </ClInclude>
     <ClInclude Include="Timer.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
+    <ClInclude Include="FileReader.h">
+      <Filter>Header Files\SystemInteraction</Filter>
+    </ClInclude>
+    <ClInclude Include="Client.h">
+      <Filter>Header Files\Client</Filter>
+    </ClInclude>
+    <ClInclude Include="FileWriter.h">
       <Filter>Header Files\SystemInteraction</Filter>
     </ClInclude>
   </ItemGroup>
@@ -47,7 +59,7 @@
     <ClCompile Include="Incedo SysMonitor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sysinteraction.cpp">
+    <ClCompile Include="SystemInformation.cpp">
       <Filter>Source Files\SystemInteraction</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">

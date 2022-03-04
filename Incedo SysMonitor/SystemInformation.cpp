@@ -1,4 +1,4 @@
-#include "sysinteraction.h"
+#include "SystemInformation.h"
 #define _WIN32_DCOM
 # pragma comment(lib, "wbemuuid.lib")
 
@@ -196,6 +196,7 @@ void SystemInformation::getCurrentTime()
 		auto start = std::chrono::system_clock::now();
 		auto legacyStart = std::chrono::system_clock::to_time_t(start);
 		char tmBuff[30];
+		time_t now = time(0);
 		ctime_s(tmBuff, sizeof(tmBuff), &legacyStart);
 		this->tmBuff = std::string(tmBuff);
 }
@@ -205,6 +206,7 @@ std::string SystemInformation::getData()
 {
 	std::stringstream data;
 	fetchHostName();
+	data << userId << ",";
 	data << hostName << ",";
 	data  << userName << ",";
 	data << totalRam << ' ' << ",";
@@ -217,6 +219,7 @@ std::string SystemInformation::getData()
 	data << totalSpace << ",";
 	data << freeSpace << ",";
 	data << tmBuff << ",";
+	data << long(time(0)) << ",";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";
@@ -227,6 +230,7 @@ std::string SystemInformation::getData()
 std::string SystemInformation::getDataToDisplay()
 {
 	std::stringstream data;
+	data << "User ID: " << userId << " \n";
 	data << "HostName: " << hostName << " \n";
 	data << "UserName: " << userName << " \n";
 	data << "Total Ram: " << totalRam << ' ' << "MB\n";
@@ -239,30 +243,13 @@ std::string SystemInformation::getDataToDisplay()
 	data << "Total Hard Disk Space: " << totalSpace << ' ' << "MB\n";
 	data << "Free Hard Disk Space: " << freeSpace << ' ' << "MB\n";
 	data << "Current Time: " << tmBuff << ' ' << "\n";
+	//data << "Time in seconds: " << long(time(0)) << ' ' << "\n";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	return data.str();
 }
 
-
-void SystemInformation::deleteFile(string FileName) {
-
-	char File[50];
-	
-	File[0] = 'D';
-	File[1] = 'a';
-	File[2] = 't';
-	File[3] = 'a';
-	File[4] = '/';
-	int i = 0;
-	for (i = 0; i < FileName.size(); i++) {
-		File[i+5] = FileName[i];
-	}
-	File[i+5] = '\0';
-	int del = remove(File);
-
-}
 
 void SystemInformation::fetchAllData()
 {
@@ -276,4 +263,11 @@ void SystemInformation::fetchAllData()
 	getHardDiskSpace();
 	getCurrentTime();
 }
+
+
+void SystemInformation::setUserId(LPSTR id)
+{
+	this->userId = std::string(id);
+}
+
 
