@@ -10,4 +10,5 @@ public:
 	FileWriter() = delete;
 	static std::string putInFile(SystemInformation si);
 	static void deleteFile(std::string FileName);
+	static std::string DIR;
 };

@@ -243,7 +243,7 @@ std::string SystemInformation::getDataToDisplay()
 	data << "Total Hard Disk Space: " << totalSpace << ' ' << "MB\n";
 	data << "Free Hard Disk Space: " << freeSpace << ' ' << "MB\n";
 	data << "Current Time: " << tmBuff << ' ' << "\n";
-	data << "Time in seconds: " << long(time(0)) << ' ' << "\n";
+	//data << "Time in seconds: " << long(time(0)) << ' ' << "\n";
 	//getGPU();
 	//data << "GPU : " << GPU.bstrVal << ' ' << "\n";
 	//std::wcout << "GPU : " << GPU.bstrVal << ' ' << "\n";
