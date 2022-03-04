@@ -152,10 +152,6 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        hInstance,
        NULL);
    DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Login);
-<<<<<<< HEAD
-
-=======
->>>>>>> Added userID
 
    if (!hWnd)
    {
@@ -262,7 +258,6 @@ INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
         {
             LPSTR text = new char[128];
             GetWindowTextA(GetDlgItem(hDlg, IDC_EDIT1), text, 128);
-<<<<<<< HEAD
             if (strlen(text) < 1)
             {
                 EndDialog(hDlg, LOWORD(wParam));
@@ -273,38 +268,6 @@ INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
             FileWriter::DIR = string(text);
             FileReader::DIR = string(text);
             //MessageBoxA(NULL, text, text, MB_OK);
-            delete[] text;
-            EndDialog(hDlg, LOWORD(wParam));
-        }
-        if(LOWORD(wParam) == IDCANCEL1)
-        {
-            EndDialog(hDlg, LOWORD(wParam));
-            DestroyWindow(hWnd);
-            return (INT_PTR)TRUE;
-        }
-        break;
-    }
-    return (INT_PTR)FALSE;
-}
-
-INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
-{
-    UNREFERENCED_PARAMETER(lParam);
-    switch (message)
-    {
-    case WM_INITDIALOG:
-        return (INT_PTR)TRUE;
-
-    case WM_COMMAND:
-        if (LOWORD(wParam) == IDOK1)
-        {
-            LPSTR text = new char[128];
-            GetWindowTextA(GetDlgItem(hDlg, IDC_EDIT1), text, 128);
-            MessageBoxA(NULL, text, text, MB_OK);
-=======
-            systemInformation.setUserId(text);
-            //MessageBoxA(NULL, text, text, MB_OK);
->>>>>>> Added userID
             delete[] text;
             EndDialog(hDlg, LOWORD(wParam));
         }

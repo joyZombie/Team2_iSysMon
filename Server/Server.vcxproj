@@ -145,12 +145,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
     <ClCompile Include="CreateDB.cpp" />
     <ClCompile Include="DatabaseConnection.cpp" />
     <ClCompile Include="SelectiveData.cpp" />
->>>>>>> feature
     <ClCompile Include="Server.cpp" />
   </ItemGroup>
   <ItemGroup>

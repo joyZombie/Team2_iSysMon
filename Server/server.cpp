@@ -1,94 +1,6 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-#include "server.h"
-=======
-#if 0
-
-
-#include <iostream>
-#include <WS2tcpip.h>
-#include <string>
-<<<<<<< HEAD
-#include <vector>
-#include <mysql.h>
-#include <sstream>
-
-#pragma comment (lib, "ws2_32.lib")
-#pragma warning(disable : 4996)
-using namespace std;
-
-char message[64] = "";
-
-void updateDB(string data)
-{
-	// Parsing Data into Vector of Strings
-	vector<string> dataStream;
-	string item = "";
-
-	for (int i = 0; i < data.size(); i++)
-	{
-		if (data[i] != ',')
-			item = item + data[i];
-		else
-		{
-			dataStream.push_back(item);
-			item = "";
-		}
-	}
-
-	// Opening DB Connection
-	MYSQL mysql, * connection;
-	MYSQL_RES result;
-	MYSQL_ROW row;
-
-	int nQueryState = 0;
-
-	// Creating Query Stream for passing as String
-	stringstream ss;
-	ss << "insert into stats values(";
-
-	for (auto value : dataStream)
-	{
-		//cout << value << " ";
-		ss << "\'";
-		ss << value;
-		if (value != dataStream.back())
-			ss << "\',";
-		else
-			ss << "\');";
-	}
-	
-	// DB Code begins here 
-	mysql_init(&mysql);
-	connection = mysql_real_connect(&mysql, "localhost", "root", "password", "sysmonitor", 0, NULL, 0);
-
-	if (connection == NULL)
-	{
-		strcpy(message, "failed");
-		cout << mysql_error(&mysql) << endl;
-	}
-	else {
-		nQueryState = mysql_query(&mysql, ss.str().c_str());
-
-		if (nQueryState != 0) {
-			strcpy(message, "failed");
-			cout << mysql_error(connection) << endl;
-		}
-	}
-
-	mysql_close(&mysql);
-}
-
-void main()
-=======
->>>>>>> Sending all backlog files.
-
-=======
 #include "server.h"
 
->>>>>>> Added new fields and integrated server
 int main()
->>>>>>> feature
 {
 	char echo_message[8] = "";
 	// Initialze winsock
@@ -176,35 +88,12 @@ int main()
 			}
 
 			string data = string(buf, 0, bytesReceived);
-<<<<<<< HEAD
-			cout << data << endl;
-			strcpy(message, "updated");
-			updateDB(data);
-			
-			// Echo message back to client
-			send(clientSocket, message, bytesReceived + 1, 0);
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-			strcpy(echo_message, "updated");
-
-			updateDB(data,echo_message);
-=======
-			updateDB(data);
->>>>>>> Added new fields and integrated server
-=======
-			strcpy(echo_message, "updated");
-=======
 			strcpy(echo_message, UPDATED_SUCCESSFULLY);
->>>>>>> Added Macros
 
 			updateDB(data,echo_message);
->>>>>>> DB connection handling
 			cout << data << endl;
 			// Echo message back to client
 			send(clientSocket, echo_message, bytesReceived + 1, 0);
->>>>>>> feature
 
 		}
 
@@ -222,19 +111,5 @@ int main()
 	WSACleanup();
 
 	system("pause");
-<<<<<<< HEAD
-}
-=======
 	return 0;
 }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
-#endif
-
-
->>>>>>> Sending all backlog files.
-=======
->>>>>>> Added new fields and integrated server
->>>>>>> feature

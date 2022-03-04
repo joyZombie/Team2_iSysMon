@@ -5,23 +5,12 @@
 
 using namespace std;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 #define BUFFER_SIZE 4096
 #define UPDATE_FAILED "failed"
 #define IP_ADDRESS "127.0.0.1"
 #define PORT 8080
 
->>>>>>> Added Macros
 int SendData(string userinput)
-=======
-int SendData(string stats)
->>>>>>> Sending all backlog files.
-=======
-int SendData(string userinput)
->>>>>>> Integrated database.
 {
 	string ipaddress = IP_ADDRESS;			// ip address of the server
 	int port = PORT;						// listening port # on the server
@@ -68,29 +57,9 @@ int SendData(string userinput)
 
 	// this needs modification to work for client side data fetching. modify as needed.
 	// stored data for passing to the server only one time. further modification can add more robustness
-<<<<<<< HEAD
-	char buf[4096];
-<<<<<<< HEAD
-<<<<<<< HEAD
-	string hash;
-	stringstream checkSum;
-
-	boost::crc_32_type  crc;
-
-	crc.process_bytes(userinput.data(), userinput.size());
-	checkSum << hex << crc.checksum();
-	hash = checkSum.str();
-
-	userinput = userinput + "#" + hash;
-=======
->>>>>>> Sending all backlog files.
-=======
-=======
 	char buf[BUFFER_SIZE];
->>>>>>> Added Macros
 	string hash;
 	stringstream checkSum;
->>>>>>> Integrated database.
 
 	boost::crc_32_type  crc;
 
@@ -117,11 +86,7 @@ int SendData(string userinput)
 					res += buf[i];
 					i++;
 				}
-<<<<<<< HEAD
-				if (res == "failed") {
-=======
 				if (res == UPDATE_FAILED) {
->>>>>>> feature
 					closesocket(sock);
 					WSACleanup();
 					return -1;
