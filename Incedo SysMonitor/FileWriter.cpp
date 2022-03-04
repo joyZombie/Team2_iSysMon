@@ -7,11 +7,12 @@ using namespace std;
 
 #pragma warning(disable : 4996)
 
-#define DIR "Data/"
+//#define DIR "Data/"
+#define FILENAME_SIZE 128
 
 string FileWriter::putInFile(SystemInformation si)
 {
-	int resDir = _mkdir(DIR);
+	int resDir = _mkdir(DIR.c_str());
 	time_t result = std::time(nullptr);
 	string FileName = ctime(&result);
 	FileName = FileName.substr(0, FileName.size() - 1);
@@ -19,7 +20,7 @@ string FileWriter::putInFile(SystemInformation si)
 	FileName.erase(remove(FileName.begin(), FileName.end(), ':'), FileName.end());
 	ofstream output;
 
-	output.open(DIR + FileName, ofstream::out);
+	output.open(DIR + "/" + FileName, ofstream::out);
 	output << si.getData();
 	output.close();
 	return FileName;
@@ -27,18 +28,17 @@ string FileWriter::putInFile(SystemInformation si)
 
 void FileWriter::deleteFile(string FileName) {
 
-	char File[50];
-
-	File[0] = DIR[0];
-	File[1] = DIR[1];
-	File[2] = DIR[2];
-	File[3] = DIR[3];
-	File[4] = DIR[4];
+	char* File = new char[FILENAME_SIZE];
+	int len = DIR.length() + 1;
+	strncpy(File, (DIR + "/").c_str(), len);
 	int i = 0;
 	for (i = 0; i < FileName.size(); i++) {
-		File[i + 5] = FileName[i];
+		File[i + len] = FileName[i];
 	}
-	File[i + 5] = '\0';
+	File[i + len] = '\0';
 	int del = remove(File);
+	delete[] File;
 
 }
+
+string FileWriter::DIR = "";

@@ -270,6 +270,8 @@ INT_PTR CALLBACK Login(HWND hDlg, UINT message, WPARAM wParam, LPARAM lParam)
                 return (INT_PTR)TRUE;
             }
             systemInformation.setUserId(text);
+            FileWriter::DIR = string(text);
+            FileReader::DIR = string(text);
             //MessageBoxA(NULL, text, text, MB_OK);
             delete[] text;
             EndDialog(hDlg, LOWORD(wParam));

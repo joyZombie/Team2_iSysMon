@@ -13,8 +13,8 @@
 
 using namespace std;
 
-#define DIR "Data/"
-#define FILE_BUF 256
+//#define DIR "Data/"
+#define FILE_BUF 512
 
 string FileReader::getFile(string FileName, bool containPath)
 {
@@ -26,7 +26,7 @@ string FileReader::getFile(string FileName, bool containPath)
 	}
 	else
 	{
-		statsFile.open(DIR + FileName);
+		statsFile.open(DIR + "/" + FileName);
 	}
 	
 	while (statsFile.good())
@@ -41,7 +41,7 @@ string FileReader::getFile(string FileName, bool containPath)
 void FileReader::sendRemainingData()
 {
 	vector<string> files;
-	string Directory = "Data";
+	string Directory = DIR;
 
 	FILE* pipe = NULL;
 	string pCmd = "dir /B " + string(Directory);
@@ -76,3 +76,5 @@ void FileReader::sendRemainingData()
 		it++;
 	}
 }
+
+string FileReader::DIR = "";
