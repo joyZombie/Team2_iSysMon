@@ -8,6 +8,9 @@
 #include "FileReader.h"
 #include "FileWriter.h"
 #include <iostream>
+#include <boost/uuid/uuid.hpp>
+#include <boost/uuid/uuid_generators.hpp>
+#include <boost/uuid/uuid_io.hpp>
 
 #define MAX_LOADSTRING 100
 #define TIMER_DURATION 5
@@ -50,6 +53,12 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     {
         return FALSE;
     }
+
+    boost::uuids::random_generator generator;
+    auto uuid = generator();
+    systemInformation.setUserId((LPSTR)(boost::uuids::to_string(uuid).c_str()));
+    FileWriter::DIR = string(boost::uuids::to_string(uuid).c_str());
+    FileReader::DIR = string(boost::uuids::to_string(uuid).c_str());
 
     HACCEL hAccelTable = LoadAccelerators(hInstance, MAKEINTRESOURCE(IDC_INCEDOSYSMONITOR));
 
@@ -151,7 +160,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
        (HMENU)START_BUTTON,       
        hInstance,
        NULL);
-   DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Login);
+   //DialogBox(hInst, MAKEINTRESOURCE(IDD_DIALOG1), hWnd, Login);
 
    if (!hWnd)
    {
