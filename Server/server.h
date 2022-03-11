@@ -30,4 +30,10 @@ void dbConnect(vector<string> dataStream,char* echo_message);
 void createDB();
 void SelectiveData();
 string verifyUserId(string userId);
-void logger(string message);
+enum LogType
+{
+	Information, Warning, Error
+};
+void logger(string message,LogType type);
+
+

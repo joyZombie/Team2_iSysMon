@@ -21,10 +21,12 @@ vector<string> dataParser(string data)
 
 	if (atof(dataItems[5].c_str()) > CPU_THRESHOLD)
 	{
+		logger("CPU LOAD Threshold exceeded",Warning);
 		cout << "\n===CPU LOAD Threshold exceeded===\n";
 	}
 	if (atoi(dataItems[4].c_str()) < RAM_THRESHOLD)
 	{
+		logger("RAM Threshold exceeded",Warning);
 		cout << "\n===RAM Threshold exceeded ===\n";
 	}
 
@@ -57,21 +59,21 @@ void dbConnect(vector<string> dataStream, char* echo_message)
 	// DB Code begins here 
 	mysql_init(&mysql);
 	connection = mysql_real_connect(&mysql, HOST, USER, PASSWORD, DATABASE, PORT, NULL, 0);
-	logger("Attempting database Connection....\n");
+	logger("Attempting database Connection....\n",Information);
 	if (connection == NULL)
 	{
 		strcpy(echo_message, UPDATE_FAILED);
-		logger("Database Connection Failed....\n");
+		logger("Database Connection Failed....\n",Error);
 		cout << mysql_error(&mysql) << endl;
 	}
 	else {
-		logger("Database Connection Successfull....\n");
+		logger("Database Connection Successfull....\n",Information);
 		mysql_query(&mysql, verifyUserId(dataStream[0]).c_str());
 
 		nQueryState = mysql_query(&mysql, ss.str().c_str());
 		
 		if (nQueryState != 0) {
-			logger("Database Insertion Failed....\n");
+			logger("Database Insertion Failed....\n",Error);
 			strcpy(echo_message, UPDATE_FAILED);
 			cout << mysql_error(connection) << endl;
 			//return 1;
@@ -100,7 +102,7 @@ void updateDB(string data,char * echo_message)
 	if (hash != checkSum.str())
 	{
 		strcpy(echo_message, UPDATE_FAILED);
-		logger("Checksum mismatch...Data Corrupted!! Aborted the process.\n");
+		logger("Checksum mismatch...Data Corrupted!! Aborted the process.\n",Error);
 		cout << "Checksum mismatch...Data Corrupted !!\nAborted the process.\n";
 		return;
 	}
