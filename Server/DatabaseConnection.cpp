@@ -1,5 +1,8 @@
 #include "server.h"
 
+#define CPU_THRESHOLD 30.00
+#define RAM_THRESHOLD 2500
+
 vector<string> dataParser(string data)
 {
 	vector<string> dataItems;
@@ -14,6 +17,15 @@ vector<string> dataParser(string data)
 			dataItems.push_back(item);
 			item = "";
 		}
+	}
+
+	if (atof(dataItems[5].c_str()) > CPU_THRESHOLD)
+	{
+		cout << "\n===CPU LOAD Threshold exceeded===\n";
+	}
+	if (atoi(dataItems[4].c_str()) < RAM_THRESHOLD)
+	{
+		cout << "\n===RAM Threshold exceeded ===\n";
 	}
 
 	return dataItems;
