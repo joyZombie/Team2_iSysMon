@@ -10,20 +10,24 @@ int main()
 	int wsOk = WSAStartup(ver, &wsData);
 	if (wsOk != 0)
 	{
+		logger("Can't Initialize winsock! Stopping...");
 		cerr << "Can't Initialize winsock! Quitting" << endl;
 		return -1;
 	}
-
+	
 	// Initialize do-While Loop to keep socket open until ESC is pressed
 	bool exit = false;
 	cout << "Initialized server program. Press ESC to exit!" << endl;
+	
 
 	do {
 
 		// Create a socket
+		logger("Server listening, waiting for client to establish connection....\n");
 		SOCKET listening = socket(AF_INET, SOCK_STREAM, 0);
 		if (listening == INVALID_SOCKET)
 		{
+			logger("Can't create a socket! Stopping...\n");
 			cerr << "Can't create a socket! Quitting" << endl;
 			return -1;
 		}
@@ -51,16 +55,19 @@ int main()
 		ZeroMemory(service, NI_MAXSERV);
 
 		cout << "Waiting for client to establish connection ..." << endl;
-
+		
 		if (getnameinfo((sockaddr*)&client, sizeof(client), host, NI_MAXHOST, service, NI_MAXSERV, 0) == 0)
 		{
+			logger("Connection established.\n");
 			cout << host << " connected on port " << service << endl;
 		}
 		else
 		{
+			logger("Connection established.\n");
 			inet_ntop(AF_INET, &client.sin_addr, host, NI_MAXHOST);
 			cout << host << " connected on port " <<
 				ntohs(client.sin_port) << endl;
+
 		}
 
 		// Close listening socket
@@ -77,17 +84,20 @@ int main()
 			int bytesReceived = recv(clientSocket, buf, 4096, 0);
 			if (bytesReceived == SOCKET_ERROR)
 			{
+				logger("Error in receiving data. Stopping the process...\n");
 				cerr << "Error in receiving data. Quitting the process..." << endl;
 				break;
 			}
 
 			if (bytesReceived == 0)
 			{
+				logger("Client Disconnected.\n");
 				cout << "Client disconnected. " << endl;
 				break;
 			}
 
 			string data = string(buf, 0, bytesReceived);
+			logger("Recieved Data from client: " + data+"\n");
 			strcpy(echo_message, UPDATED_SUCCESSFULLY);
 
 			updateDB(data,echo_message);
@@ -100,6 +110,8 @@ int main()
 		// Close the socket
 		closesocket(clientSocket);
 
+		logger("Socket Closed.\n");
+		
 		Sleep(1000);
 
 		if (GetAsyncKeyState(VK_ESCAPE))

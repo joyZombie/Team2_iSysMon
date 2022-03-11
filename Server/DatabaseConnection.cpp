@@ -57,18 +57,21 @@ void dbConnect(vector<string> dataStream, char* echo_message)
 	// DB Code begins here 
 	mysql_init(&mysql);
 	connection = mysql_real_connect(&mysql, HOST, USER, PASSWORD, DATABASE, PORT, NULL, 0);
-
+	logger("Attempting database Connection....\n");
 	if (connection == NULL)
 	{
 		strcpy(echo_message, UPDATE_FAILED);
+		logger("Database Connection Failed....\n");
 		cout << mysql_error(&mysql) << endl;
 	}
 	else {
+		logger("Database Connection Successfull....\n");
 		mysql_query(&mysql, verifyUserId(dataStream[0]).c_str());
 
 		nQueryState = mysql_query(&mysql, ss.str().c_str());
 		
 		if (nQueryState != 0) {
+			logger("Database Insertion Failed....\n");
 			strcpy(echo_message, UPDATE_FAILED);
 			cout << mysql_error(connection) << endl;
 			//return 1;
@@ -97,6 +100,7 @@ void updateDB(string data,char * echo_message)
 	if (hash != checkSum.str())
 	{
 		strcpy(echo_message, UPDATE_FAILED);
+		logger("Checksum mismatch...Data Corrupted!! Aborted the process.\n");
 		cout << "Checksum mismatch...Data Corrupted !!\nAborted the process.\n";
 		return;
 	}

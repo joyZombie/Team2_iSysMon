@@ -5,6 +5,10 @@
 #include <mysql.h>
 #include <sstream>
 #include <boost\crc.hpp>
+#include <ctime>
+#include <fstream>
+#include <direct.h>
+#include <sstream>
 
 #pragma comment(lib, "User32.lib")
 #pragma comment (lib, "ws2_32.lib")
@@ -26,3 +30,4 @@ void dbConnect(vector<string> dataStream,char* echo_message);
 void createDB();
 void SelectiveData();
 string verifyUserId(string userId);
+void logger(string message);
